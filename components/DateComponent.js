@@ -1,0 +1,121 @@
+import { FontAwesome } from '@expo/vector-icons';
+import DateTimePicker from '@react-native-community/datetimepicker';
+import { useState } from 'react';
+import { Platform, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { colors } from '../colors';
+
+    export default function DateComponent({date, setDate, iconName, size, txtInput}){
+
+        const [showPicker, setShowPicker] = useState(false);
+
+        function novaData(event, selectedDate){
+            setDate(selectedDate);
+            if(Platform.OS == 'android'){
+                setShowPicker(false);
+            }
+        }
+
+        return(
+            <View style={styles.container}>
+
+                <View style={styles.logoTxt}>
+                    <FontAwesome
+                    name={iconName}
+                    size={size}
+                    color="rgba(255, 255, 255, 1)"
+                    />
+                
+                    <Text style={styles.txt}>{txtInput}</Text>
+                </View>
+
+                <Text style={styles.infoDate}></Text>
+                
+
+                <TouchableOpacity 
+                    onPress={() => setShowPicker(true)} 
+                    style={styles.dateIni}
+                >
+                    <Text>Clique para selecionar a data de início</Text>
+                </TouchableOpacity>
+
+                {date && (
+                    <Text style={{color: 'white'}}>{date.toLocaleDateString()}</Text>
+                )}
+                
+
+                {showPicker && (
+                    <View style={styles.containerDateTimePicker}>
+                        <DateTimePicker
+                            display={Platform.OS === 'ios' ? 'spinner' : 'default'}
+                            mode="date"
+                            value={date}
+                            onChange={novaData}
+                            locale="pt-br"
+                        />
+
+                        {Platform.OS == 'ios' && (
+                            <TouchableOpacity 
+                                style={styles.btnDateTimePicker}
+                                onPress={() => {setShowPicker(false)}}
+                            >
+                                <Text style={styles.txtDateTimePicker}>Selecionar data</Text>
+                            </TouchableOpacity>
+                        )}
+                     </View>
+                )}
+                        
+            </View>
+        )
+    }
+
+    const styles = StyleSheet.create({
+        dateIni:{
+            backgroundColor: 'white',
+            width: '100%',
+            padding: 18,
+            color: 'black',
+            borderBottomStartRadius: 6,
+            borderBottomEndRadius: 6
+        },
+        container:{
+            width: '100%'
+        },
+        logoTxt:{
+            flexDirection: 'row',
+            alignItems: 'center',
+            borderColor: 'black',
+            backgroundColor: colors.orange,
+            borderRadius: 2,
+            paddingLeft: 8,
+            paddingVertical: 2
+        },
+        txt:{
+            width: '100%',
+            paddingTop: 4,
+            fontSize: 16,
+            fontWeight: 'bold',
+            marginLeft: 9,
+            color: 'white'
+        },
+        containerDateTimePicker:{
+            backgroundColor: 'rgba(255, 255, 255, 0.09)',
+            alignItems: 'center',
+            paddingTop: 20,
+            marginVertical: 20,
+            borderRadius: 10
+        },
+        btnDateTimePicker:{
+            backgroundColor: 'white',
+            width: '50%',
+            height: 40,
+            alignItems: 'center',
+            justifyContent: 'center',
+            marginTop: 20,
+            marginBottom: 20,
+            borderRadius: 7
+        },
+        txtDateTimePicker:{
+            color: 'black'
+        }
+    });
+
