@@ -1,6 +1,6 @@
-import { StyleSheet, Text, TextInput, View } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
-import { colors } from '../colors'
+import { StyleSheet, Text, TextInput, View } from 'react-native';
+import { colors } from '../colors';
 
 export default function InputComponent({txtInput, txtPlaceholder, setState, value, iconName, size}){
     return(
@@ -50,8 +50,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         borderColor: 'black',
-        // backgroundColor: colors.orange,
-        backgroundColor: 'blue',
+        backgroundColor: colors.orange,
         borderRadius: 2,
         paddingLeft: 8,
         paddingVertical: 2
