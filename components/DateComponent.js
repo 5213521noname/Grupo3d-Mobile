@@ -28,21 +28,15 @@ import { colors } from '../colors';
                     <Text style={styles.txt}>{txtInput}</Text>
                 </View>
 
-                <Text style={styles.infoDate}></Text>
+                <Text style={styles.infoDate}>{date.toLocaleDateString()}</Text>
                 
-
                 <TouchableOpacity 
                     onPress={() => setShowPicker(true)} 
                     style={styles.dateIni}
                 >
                     <Text>Clique para selecionar a data de início</Text>
                 </TouchableOpacity>
-
-                {date && (
-                    <Text style={{color: 'white'}}>{date.toLocaleDateString()}</Text>
-                )}
                 
-
                 {showPicker && (
                     <View style={styles.containerDateTimePicker}>
                         <DateTimePicker
@@ -78,16 +72,19 @@ import { colors } from '../colors';
             borderBottomEndRadius: 6
         },
         container:{
-            width: '100%'
+            width: '100%',
+            marginBottom: 14,
         },
         logoTxt:{
             flexDirection: 'row',
             alignItems: 'center',
-            borderColor: 'black',
             backgroundColor: colors.orange,
             borderRadius: 2,
             paddingLeft: 8,
-            paddingVertical: 2
+            paddingVertical: 2,
+            borderBottomWidth: 2,
+            borderBottomColor: 'white',
+            paddingBottom: 7
         },
         txt:{
             width: '100%',
@@ -115,7 +112,16 @@ import { colors } from '../colors';
             borderRadius: 7
         },
         txtDateTimePicker:{
-            color: 'black'
+            color: 'black',
+        },
+
+        infoDate:{
+            color: 'white',
+            width: '100%',
+            backgroundColor: colors.orange,
+            fontSize: 15,
+            padding: 10,
+            fontWeight: 'bold'
         }
     });
 
