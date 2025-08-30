@@ -4,12 +4,12 @@ import { useState } from 'react';
 import { Platform, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { colors } from '../colors';
 
-    export default function DateComponent({date, setDate, iconName, size, txtInput}){
+    export default function DateComponent({time, setTime, iconName, size, txtInput}){
 
         const [showPicker, setShowPicker] = useState(false);
 
-        function novaData(event, selectedDate){
-            setDate(selectedDate);
+        function novaData(event, selectedTime){
+            setDate(selectedTime);
             if(Platform.OS == 'android'){
                 setShowPicker(false);
             }
@@ -28,31 +28,31 @@ import { colors } from '../colors';
                     <Text style={styles.txt}>{txtInput}</Text>
                 </View>
 
-                <Text style={styles.infoDate}>{date.toLocaleDateString()}</Text>
+                <Text style={styles.infoTime}>{date.toLocaleTimeString()}</Text>
                 
                 <TouchableOpacity 
                     onPress={() => setShowPicker(true)} 
-                    style={styles.dateIni}
+                    style={styles.TimeIni}
                 >
                     <Text>Clique para selecionar a data de início</Text>
                 </TouchableOpacity>
                 
                 {showPicker && (
-                    <View style={styles.containerDateTimePicker}>
+                    <View style={styles.containerTimePicker}>
                         <DateTimePicker
-                            display={Platform.OS === 'ios' ? 'inline' : 'default'}
-                            mode="date"
-                            value={date}
-                            onChange={novaData}
+                            display={Platform.OS === 'ios' ? 'spinner' : 'default'}
+                            mode="time"
+                            value={time}
+                            onChange={novaHora}
                             locale="pt-br"
                         />
 
                         {Platform.OS == 'ios' && (
                             <TouchableOpacity 
-                                style={styles.btnDateTimePicker}
+                                style={styles.btnTimePicker}
                                 onPress={() => {setShowPicker(false)}}
                             >
-                                <Text style={styles.txtDateTimePicker}>Selecionar data</Text>
+                                <Text style={styles.txtTimePicker}>Selecionar hora</Text>
                             </TouchableOpacity>
                         )}
                      </View>
@@ -63,7 +63,7 @@ import { colors } from '../colors';
     }
 
     const styles = StyleSheet.create({
-        dateIni:{
+        TimeIni:{
             backgroundColor: 'white',
             width: '100%',
             padding: 18,
@@ -94,14 +94,14 @@ import { colors } from '../colors';
             marginLeft: 9,
             color: 'white'
         },
-        containerDateTimePicker:{
+        containerTimePicker:{
             backgroundColor: 'rgba(255, 255, 255, 0.09)',
             alignItems: 'center',
             paddingTop: 20,
             marginVertical: 20,
             borderRadius: 10
         },
-        btnDateTimePicker:{
+        btnTimePicker:{
             backgroundColor: 'white',
             width: '50%',
             height: 40,
@@ -111,11 +111,11 @@ import { colors } from '../colors';
             marginBottom: 20,
             borderRadius: 7
         },
-        txtDateTimePicker:{
+        txtTimePicker:{
             color: 'black',
         },
 
-        infoDate:{
+        infoTime:{
             color: 'white',
             width: '100%',
             backgroundColor: colors.orange,

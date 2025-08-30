@@ -4,13 +4,16 @@ import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-nati
 import { colors } from '../colors';
 import DateComponent from '../components/DateComponent';
 import InputComponent from '../components/InputComponent';
+import InputCheckBox from '../components/InputCheckBox';
 
 export default function formulario(){
-    //States inputs
+
     const [nome, setNome] = useState('joaquim');
 
-    //States dataInicio
-    const [dateIni, setDateIni] = useState(new Date())  
+    const [dateIni, setDateIni] = useState(new Date());
+
+    //state almocço
+    const [almoco, setAlmoco] = useState('');
 
     const router = useRouter();
 
@@ -27,6 +30,13 @@ export default function formulario(){
                     txtInput="Data de início"
                     size={20}
                 />
+
+                <InputCheckBox
+                    txtInput="Almoço"
+                    btnState={almoco}
+                    setbtnState={setAlmoco}
+                />
+
 
                 <InputComponent
                     txtInput="Job"
