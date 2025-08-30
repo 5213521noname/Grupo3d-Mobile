@@ -8,8 +8,8 @@ import { colors } from '../colors';
 
         const [showPicker, setShowPicker] = useState(false);
 
-        function novaData(event, selectedTime){
-            setDate(selectedTime);
+        function novaHora(event, selectedTime){
+            setTime(selectedTime);
             if(Platform.OS == 'android'){
                 setShowPicker(false);
             }
@@ -28,13 +28,15 @@ import { colors } from '../colors';
                     <Text style={styles.txt}>{txtInput}</Text>
                 </View>
 
-                <Text style={styles.infoTime}>{date.toLocaleTimeString()}</Text>
+                <Text style={styles.infoTime}>
+                    {time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                </Text>
                 
                 <TouchableOpacity 
                     onPress={() => setShowPicker(true)} 
                     style={styles.TimeIni}
                 >
-                    <Text>Clique para selecionar a data de início</Text>
+                    <Text>Clique para selecionar a hora de início</Text>
                 </TouchableOpacity>
                 
                 {showPicker && (
@@ -66,7 +68,7 @@ import { colors } from '../colors';
         TimeIni:{
             backgroundColor: 'white',
             width: '100%',
-            padding: 18,
+            padding: 12,
             color: 'black',
             borderBottomStartRadius: 6,
             borderBottomEndRadius: 6
@@ -84,7 +86,8 @@ import { colors } from '../colors';
             paddingVertical: 2,
             borderBottomWidth: 2,
             borderBottomColor: 'white',
-            paddingBottom: 7
+            paddingBottom: 7,
+            paddingTop: 5
         },
         txt:{
             width: '100%',

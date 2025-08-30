@@ -34,7 +34,7 @@ import { colors } from '../colors';
                     onPress={() => setShowPicker(true)} 
                     style={styles.dateIni}
                 >
-                    <Text>Clique para selecionar a data de início</Text>
+                    <Text>Clique para alterar a data de início</Text>
                 </TouchableOpacity>
                 
                 {showPicker && (
@@ -66,7 +66,7 @@ import { colors } from '../colors';
         dateIni:{
             backgroundColor: 'white',
             width: '100%',
-            padding: 18,
+            padding: 12,
             color: 'black',
             borderBottomStartRadius: 6,
             borderBottomEndRadius: 6
@@ -84,7 +84,8 @@ import { colors } from '../colors';
             paddingVertical: 2,
             borderBottomWidth: 2,
             borderBottomColor: 'white',
-            paddingBottom: 7
+            paddingBottom: 7,
+            paddingTop: 5
         },
         txt:{
             width: '100%',

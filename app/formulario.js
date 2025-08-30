@@ -5,12 +5,14 @@ import { colors } from '../colors';
 import DateComponent from '../components/DateComponent';
 import InputComponent from '../components/InputComponent';
 import InputCheckBox from '../components/InputCheckBox';
+import TimeComponent from '../components/TimeComponent';
 
 export default function formulario(){
 
     const [nome, setNome] = useState('joaquim');
 
     const [dateIni, setDateIni] = useState(new Date());
+    const [timeIni, setTimeIni] = useState(new Date());
 
     //state almocço
     const [almoco, setAlmoco] = useState('');
@@ -28,6 +30,14 @@ export default function formulario(){
                     setDate={setDateIni}
                     iconName="clock-o"
                     txtInput="Data de início"
+                    size={20}
+                />
+
+                <TimeComponent
+                    time={timeIni}
+                    setTime={setTimeIni}
+                    iconName="clock-o"
+                    txtInput="Hora de início"
                     size={20}
                 />
 
