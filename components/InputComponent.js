@@ -60,6 +60,6 @@ const styles = StyleSheet.create({
         flex: 1,
         borderRadius: 7,
         backgroundColor: 'white',
-        marginBottom: 20
+        marginBottom: 17
     },
 });

@@ -73,7 +73,7 @@ import { colors } from '../colors';
         },
         container:{
             width: '100%',
-            marginBottom: 14,
+            marginBottom: 17,
         },
         logoTxt:{
             flexDirection: 'row',

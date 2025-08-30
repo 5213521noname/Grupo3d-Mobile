@@ -97,36 +97,48 @@ export default function formulario(){
                     txtPlaceholder="Digite aqui"
                     setState={setKm}
                     value={km}
+                    iconName="road"
+                    size={20}
                 />
 
                 <InputCheckBox
                     txtInput="Pedágio"
                     btnState={pedagio}
                     setbtnState={setPedagio}
+                    iconName="user"
+                    size={20}
                 />
 
                 <InputCheckBox
                     txtInput="Estacionamento"
                     btnState={estacionamento}
                     setbtnState={setEstacionamento}
+                    iconName="user"
+                    size={20}
                 />
 
                 <InputCheckBox
                     txtInput="Inversor"
                     btnState={inversor}
                     setbtnState={setInversor}
+                    iconName="user"
+                    size={20}
                 />
 
                 <InputCheckBox
                     txtInput="Zona azul"
                     btnState={zonaAzul}
                     setbtnState={setZonaAzul}
+                    iconName="user"
+                    size={20}
                 />
 
                 <InputCheckBox
                     txtInput="Almoço"
                     btnState={almoco}
                     setbtnState={setAlmoco}
+                    iconName="user"
+                    size={20}
                 />
 
                 <TouchableOpacity 

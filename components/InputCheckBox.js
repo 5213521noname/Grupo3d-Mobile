@@ -1,7 +1,8 @@
+import { FontAwesome } from "@expo/vector-icons";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { colors } from '../colors';
 
-export default function InputCheckBox({txtInput, btnState, setbtnState}){
+export default function InputCheckBox({txtInput, btnState, setbtnState, iconName, size}){
 
     function pressYes(){
         setbtnState('yes')
@@ -13,6 +14,14 @@ export default function InputCheckBox({txtInput, btnState, setbtnState}){
 
     return(
         <View style={styles.container}>
+
+            <FontAwesome
+                name={iconName}
+                size={size}
+                color="rgba(255, 255, 255, 1)"
+            />
+
+
             <Text style={styles.txtInput}>{txtInput}</Text>
 
             <TouchableOpacity 
@@ -44,9 +53,10 @@ const styles = StyleSheet.create({
         backgroundColor: colors.orange,
         alignItems: 'center',
         flexDirection: 'row',
-        marginBottom: 20,
-        padding: 5,
-        borderRadius: 5
+        marginBottom: 17,
+        padding: 10,
+        borderRadius: 5,
+        paddingLeft: 15
     },
     txtInput:{
         flex: 1,
