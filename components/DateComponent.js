@@ -40,7 +40,7 @@ import { colors } from '../colors';
                 {showPicker && (
                     <View style={styles.containerDateTimePicker}>
                         <DateTimePicker
-                            display={Platform.OS === 'ios' ? 'inline' : 'default'}
+                            display={Platform.OS === 'ios' ? 'spinner' : 'default'}
                             mode="date"
                             value={date}
                             onChange={novaData}

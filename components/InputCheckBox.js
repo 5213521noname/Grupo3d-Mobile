@@ -1,15 +1,14 @@
-import { useState } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { colors } from '../colors';
 
 export default function InputCheckBox({txtInput, btnState, setbtnState}){
 
     function pressYes(){
-        setbtnState(true)
+        setbtnState('yes')
     }
 
     function pressNo(){
-        setbtnState(false)
+        setbtnState('no')
     }
 
     return(
@@ -19,7 +18,7 @@ export default function InputCheckBox({txtInput, btnState, setbtnState}){
             <TouchableOpacity 
                 style={[
                     styles.checkBox,
-                    btnState == true && styles.checkBoxTrue
+                    btnState == 'yes' && styles.checkBoxTrue
                 ]}
                 onPress={pressYes}
             >
@@ -29,7 +28,7 @@ export default function InputCheckBox({txtInput, btnState, setbtnState}){
             <TouchableOpacity 
                 style={[
                     styles.checkBox,
-                    btnState == false && styles.checkBoxFalse
+                    btnState == 'no' && styles.checkBoxFalse
                 ]}
                 onPress={pressNo}
             >
@@ -45,7 +44,7 @@ const styles = StyleSheet.create({
         backgroundColor: colors.orange,
         alignItems: 'center',
         flexDirection: 'row',
-        marginBottom: 15,
+        marginBottom: 20,
         padding: 5,
         borderRadius: 5
     },

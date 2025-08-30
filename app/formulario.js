@@ -3,19 +3,36 @@ import { useState } from 'react';
 import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { colors } from '../colors';
 import DateComponent from '../components/DateComponent';
-import InputComponent from '../components/InputComponent';
 import InputCheckBox from '../components/InputCheckBox';
+import InputComponent from '../components/InputComponent';
 import TimeComponent from '../components/TimeComponent';
 
 export default function formulario(){
 
-    const [nome, setNome] = useState('joaquim');
+    //STATES INPUT
+    const [produtor, setProdutor] = useState('');
+    const [job, setJob] = useState('');
+    const [km, setKm] = useState('');
 
+
+    //STATES CHECKBOX
+    const [pedagio, setPedagio] = useState('');
+    const [estacionamento, setEstacionamento] = useState('');
+    const [inversor, setInversor] = useState('');
+    const [zonaAzul, setZonaAzul] = useState('');
+    const [almoco, setAlmoco] = useState('');
+
+
+    //STATES HORARIOS
+    //INÍCIO
     const [dateIni, setDateIni] = useState(new Date());
     const [timeIni, setTimeIni] = useState(new Date());
 
-    //state almocço
-    const [almoco, setAlmoco] = useState('');
+    //TÉRMINO
+    const [dateFim, setDateFim] = useState(new Date());
+    const [timeFim, setTimeFim] = useState(new Date());
+
+
 
     const router = useRouter();
 
@@ -29,7 +46,7 @@ export default function formulario(){
                     date={dateIni}
                     setDate={setDateIni}
                     iconName="clock-o"
-                    txtInput="Data de início"
+                    txtInput="Data início"
                     size={20}
                 />
 
@@ -37,22 +54,31 @@ export default function formulario(){
                     time={timeIni}
                     setTime={setTimeIni}
                     iconName="clock-o"
-                    txtInput="Hora de início"
+                    txtInput="Hora início"
                     size={20}
                 />
 
-                <InputCheckBox
-                    txtInput="Almoço"
-                    btnState={almoco}
-                    setbtnState={setAlmoco}
+                <DateComponent
+                    date={dateFim}
+                    setDate={setDateFim}
+                    iconName="clock-o"
+                    txtInput="Data final"
+                    size={20}
                 />
 
+                <TimeComponent
+                    time={timeFim}
+                    setTime={setTimeFim}
+                    iconName="clock-o"
+                    txtInput="Hora final"
+                    size={20}
+                />
 
                 <InputComponent
                     txtInput="Job"
                     txtPlaceholder="Digite aqui"
-                    setState={setNome}
-                    value={nome}
+                    setState={setJob}
+                    value={job}
                     iconName="briefcase"
                     size={19}
                 />
@@ -60,8 +86,8 @@ export default function formulario(){
                 <InputComponent
                     txtInput="Produtor(a)"
                     txtPlaceholder="Digite aqui"
-                    setState={setNome}
-                    value={nome}
+                    setState={setProdutor}
+                    value={produtor}
                     iconName="user"
                     size={20}
                 />
@@ -69,81 +95,39 @@ export default function formulario(){
                 <InputComponent
                     txtInput="Km rodado"
                     txtPlaceholder="Digite aqui"
-                    setState={setNome}
-                    value={nome}
+                    setState={setKm}
+                    value={km}
                 />
 
-                <InputComponent
-                    txtInput="Apelido"
-                    txtPlaceholder="Digite aqui"
-                    setState={setNome}
-                    value={nome}
+                <InputCheckBox
+                    txtInput="Pedágio"
+                    btnState={pedagio}
+                    setbtnState={setPedagio}
                 />
 
-                <InputComponent
-                    txtInput="Apelido"
-                    txtPlaceholder="Digite aqui"
-                    setState={setNome}
-                    value={nome}
+                <InputCheckBox
+                    txtInput="Estacionamento"
+                    btnState={estacionamento}
+                    setbtnState={setEstacionamento}
                 />
 
-                <InputComponent
-                    txtInput="Apelido"
-                    txtPlaceholder="Digite aqui"
-                    setState={setNome}
-                    value={nome}
+                <InputCheckBox
+                    txtInput="Inversor"
+                    btnState={inversor}
+                    setbtnState={setInversor}
                 />
 
-                <InputComponent
-                    txtInput="Apelido"
-                    txtPlaceholder="Digite aqui"
-                    setState={setNome}
-                    value={nome}
+                <InputCheckBox
+                    txtInput="Zona azul"
+                    btnState={zonaAzul}
+                    setbtnState={setZonaAzul}
                 />
 
-                <InputComponent
-                    txtInput="Apelido"
-                    txtPlaceholder="Digite aqui"
-                    setState={setNome}
-                    value={nome}
+                <InputCheckBox
+                    txtInput="Almoço"
+                    btnState={almoco}
+                    setbtnState={setAlmoco}
                 />
-
-                <InputComponent
-                    txtInput="Apelido"
-                    txtPlaceholder="Digite aqui"
-                    setState={setNome}
-                    value={nome}
-                />
-
-                <InputComponent
-                    txtInput="Apelido"
-                    txtPlaceholder="Digite aqui"
-                    setState={setNome}
-                    value={nome}
-                />
-
-                <InputComponent
-                    txtInput="Apelido"
-                    txtPlaceholder="Digite aqui"
-                    setState={setNome}
-                    value={nome}
-                />
-
-                <InputComponent
-                    txtInput="Apelido"
-                    txtPlaceholder="Digite aqui"
-                    setState={setNome}
-                    value={nome}
-                />
-
-                <InputComponent
-                    txtInput="Apelido"
-                    txtPlaceholder="Digite aqui"
-                    setState={setNome}
-                    value={nome}
-                />
-
-                <Text style={{color: 'white'}}>{nome}</Text>
 
                 <TouchableOpacity 
                     onPress={() => router.back()} 

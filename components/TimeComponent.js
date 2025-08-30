@@ -75,7 +75,7 @@ import { colors } from '../colors';
         },
         container:{
             width: '100%',
-            marginBottom: 14,
+            marginBottom: 20,
         },
         logoTxt:{
             flexDirection: 'row',
