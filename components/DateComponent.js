@@ -28,13 +28,12 @@ import { colors } from '../colors';
                     <Text style={styles.txt}>{txtInput}</Text>
                 </View>
 
-                <Text style={styles.infoDate}>{date.toLocaleDateString()}</Text>
                 
                 <TouchableOpacity 
                     onPress={() => setShowPicker(true)} 
                     style={styles.dateIni}
                 >
-                    <Text>Clique para alterar a data de início</Text>
+                    <Text>{`${date.toLocaleDateString()} - Clique para alterar a data`}</Text>
                 </TouchableOpacity>
                 
                 {showPicker && (

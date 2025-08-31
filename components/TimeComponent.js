@@ -27,16 +27,12 @@ import { colors } from '../colors';
                 
                     <Text style={styles.txt}>{txtInput}</Text>
                 </View>
-
-                <Text style={styles.infoTime}>
-                    {time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
-                </Text>
                 
                 <TouchableOpacity 
                     onPress={() => setShowPicker(true)} 
                     style={styles.TimeIni}
                 >
-                    <Text>Clique para selecionar a hora de início</Text>
+                    <Text>{`${time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })} - Clique para selecionar a hora`}</Text>
                 </TouchableOpacity>
                 
                 {showPicker && (

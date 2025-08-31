@@ -5,9 +5,13 @@ import { colors } from '../colors';
 import DateComponent from '../components/DateComponent';
 import InputCheckBox from '../components/InputCheckBox';
 import InputComponent from '../components/InputComponent';
+import SelectPlaca from '../components/SelectPlaca';
 import TimeComponent from '../components/TimeComponent';
 
 export default function formulario(){
+
+    //STATE PLACA
+    const [placa, setPlaca] = useState('Selecione uma placa')
 
     //STATES INPUT
     const [produtor, setProdutor] = useState('');
@@ -41,6 +45,13 @@ export default function formulario(){
             <View style={styles.containerView}>
 
                 <Text style={styles.txtRelatorio}>Relatório de serviço</Text>
+
+                <SelectPlaca
+                    iconName="car"
+                    size={16}
+                    setPlaca={setPlaca}
+                    placa={placa}
+                />
 
                 <DateComponent
                     date={dateIni}
