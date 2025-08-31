@@ -33,7 +33,7 @@ import { colors } from '../colors';
                     onPress={() => setShowPicker(true)} 
                     style={styles.dateIni}
                 >
-                    <Text>{`${date.toLocaleDateString()} - Clique para alterar a data`}</Text>
+                    <Text>{`${date.toLocaleDateString()}`}</Text>
                 </TouchableOpacity>
                 
                 {showPicker && (
@@ -81,8 +81,6 @@ import { colors } from '../colors';
             borderRadius: 2,
             paddingLeft: 8,
             paddingVertical: 2,
-            borderBottomWidth: 2,
-            borderBottomColor: 'white',
             paddingBottom: 7,
             paddingTop: 5
         },

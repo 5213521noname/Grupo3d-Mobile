@@ -134,8 +134,6 @@ const styles = StyleSheet.create({
     },
     btnSetPlaca:{
         backgroundColor: 'white',
-        // minWidth: 132,
-        // maxWidth: 138,
         alignItems: 'center',
         justifyContent: 'center',
         height: 40,

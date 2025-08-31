@@ -32,7 +32,7 @@ import { colors } from '../colors';
                     onPress={() => setShowPicker(true)} 
                     style={styles.TimeIni}
                 >
-                    <Text>{`${time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })} - Clique para selecionar a hora`}</Text>
+                    <Text>{`${time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`}</Text>
                 </TouchableOpacity>
                 
                 {showPicker && (

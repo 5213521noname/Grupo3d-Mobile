@@ -1,15 +1,15 @@
 import { FontAwesome } from '@expo/vector-icons';
+import { useRouter } from 'expo-router';
 import { useState } from 'react';
 import { Alert, Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import logo from '../assets/images/logo.png';
-import { useRouter } from 'expo-router';
-import { colors } from '../colors'
+import { colors } from '../colors';
 
 
 export default function index() {
 
-  const [usuario, setUsuario] = useState('joaquim');
-  const [senha, setSenha] = useState('123456789');
+  const [usuario, setUsuario] = useState('');
+  const [senha, setSenha] = useState('');
 
   const router = useRouter();
 
@@ -18,7 +18,7 @@ export default function index() {
       Alert.alert("Erro, preencha todos os campos");
       return
     }
-    if(usuario.trim() === 'joaquim' && senha.trim() === '123456789'){
+    if(usuario.trim() === 'emily' && senha.trim() === '123456789'){
       router.replace('./home');
     } else {
       Alert.alert("Usuário ou senha inválidos!");

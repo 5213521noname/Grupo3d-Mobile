@@ -5,7 +5,6 @@ import { colors } from '../colors';
 
 export default function home(){
 
-    let usuario = "Joaquim"
     const router = useRouter();
     
     function novoRelatorio(){
