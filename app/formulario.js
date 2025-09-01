@@ -153,6 +153,12 @@ export default function formulario(){
                 />
 
                 <TouchableOpacity 
+                    style={styles.btnEnviar}
+                    >
+                    <Text style={styles.btnEnviarTxt}>Enviar Relatório</Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity 
                     onPress={() => router.back()} 
                     style={styles.btnVoltar}
                     >
@@ -181,9 +187,22 @@ const styles = StyleSheet.create({
         width: 80,
         justifyContent: 'center',
         alignItems: 'center',
-        borderRadius: 4
+        borderRadius: 4,
+        marginRight: 235
     },
     btnVoltarTxt:{
+        color: 'black'
+    },
+    btnEnviar:{
+        height: 55,
+        backgroundColor: 'white',
+        width: '100%',
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 4,
+        marginBottom: 60
+    },
+    btnEnviarTxt:{
         color: 'black'
     },
     inputForm:{

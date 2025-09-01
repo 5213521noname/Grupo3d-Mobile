@@ -8,8 +8,8 @@ import { colors } from '../colors';
 
 export default function index() {
 
-  const [usuario, setUsuario] = useState('');
-  const [senha, setSenha] = useState('');
+  const [usuario, setUsuario] = useState('emily');
+  const [senha, setSenha] = useState('123456789');
 
   const router = useRouter();
 
@@ -38,7 +38,7 @@ export default function index() {
           name="user" 
           size={28} 
           color="black"
-          style={{width: '10%', opacity: 0.4}}
+          style={styles.iconInput}
         />
 
         <TextInput
@@ -54,7 +54,7 @@ export default function index() {
           name="lock" 
           size={28} 
           color="black"
-          style={{width: '10%', opacity: 0.4}}
+          style={styles.iconInput}
         />
 
         <TextInput
@@ -79,23 +79,14 @@ export default function index() {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'black',
+    backgroundColor: 'rgba(0, 0, 0, 0.9)',
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    paddingBottom: 140
+    paddingBottom: 140,
   },
   texto: {
     color: 'white',
-  },
-  input: {
-    padding: 10,
-    borderRadius: 7,
-    color: 'white',
-    fontWeight: 'bold',
-    textAlign: 'center',
-    fontSize: 17.5,
-    flex: 1
   },
   buttonLogin: {
     backgroundColor: 'white',
@@ -118,19 +109,34 @@ const styles = StyleSheet.create({
     padding: 5,
     borderRadius: 7,
     width: '78%',
-    paddingRight: 60,
     margin: 4,
-    paddingLeft: 35,
     height: 75,
-    borderWidth: 2.5,
+    borderWidth: 2,
     borderColor: 'white',
     borderStyle: 'solid'
+  },
+  iconInput:{
+    width: '20%', 
+    opacity: 0.4,
+    textAlign: 'center'
+  },
+  input: {
+    padding: 10,
+    borderRadius: 7,
+    color: 'white',
+    fontWeight: 'bold',
+    textAlign: 'center',
+    fontSize: 17.5,
+    width: '80%',
+    paddingRight: 70
   },
   logo: {
     height: 190,
     marginBottom: 50,
     resizeMode: 'contain'
-  }
+  },
+  
+  
 
 });
 
