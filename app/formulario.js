@@ -5,18 +5,21 @@ import { colors } from '../colors';
 import DateComponent from '../components/DateComponent';
 import InputCheckBox from '../components/InputCheckBox';
 import InputComponent from '../components/InputComponent';
+import ObsInput from '../components/ObsInput';
 import SelectPlaca from '../components/SelectPlaca';
 import TimeComponent from '../components/TimeComponent';
 
 export default function formulario(){
 
     //STATE PLACA
-    const [placa, setPlaca] = useState('Selecione uma placa')
+    const [placa, setPlaca] = useState('Selecione uma placa');
 
     //STATES INPUT
     const [produtor, setProdutor] = useState('');
     const [job, setJob] = useState('');
-    const [km, setKm] = useState('');
+    const [kmIni, setKmIni] = useState('');
+    const [kmFim, setKmFim] = useState('');
+    const [obs, setObs] = useState('');
 
 
     //STATES CHECKBOX
@@ -25,6 +28,13 @@ export default function formulario(){
     const [inversor, setInversor] = useState('');
     const [zonaAzul, setZonaAzul] = useState('');
     const [almoco, setAlmoco] = useState('');
+    const [viagem, setViagem] = useState('');
+    const [parceiro, setParceiro] = useState('');
+
+    //STATES VALORES
+    const [valorEstacionamento, setValorEstacionamento] = useState('');
+    const [localViagem, setLocalViagem] = useState('');
+    const [valorPedagioParceiro, setValorPedagioParceiro] = useState('');
 
 
     //STATES HORARIOS
@@ -104,11 +114,28 @@ export default function formulario(){
                 />
 
                 <InputComponent
-                    txtInput="Km rodado"
+                    txtInput="Km Inicial"
                     txtPlaceholder="Digite aqui"
-                    setState={setKm}
-                    value={km}
+                    setState={setKmIni}
+                    value={kmIni}
                     iconName="road"
+                    size={20}
+                />
+
+                <InputComponent
+                    txtInput="Km Final"
+                    txtPlaceholder="Digite aqui"
+                    setState={setKmFim}
+                    value={kmFim}
+                    iconName="road"
+                    size={20}
+                />
+
+                <InputCheckBox
+                    txtInput="Motorista parceiro"
+                    btnState={parceiro}
+                    setbtnState={setParceiro}
+                    iconName="user"
                     size={20}
                 />
 
@@ -120,6 +147,17 @@ export default function formulario(){
                     size={20}
                 />
 
+                {(parceiro == 'true' && pedagio == 'true') && (
+                    <InputComponent
+                        txtInput="Valor pedágio"
+                        txtPlaceholder="Digite aqui"
+                        setState={setValorPedagioParceiro}
+                        value={valorPedagioParceiro}
+                        iconName="road"
+                        size={20}
+                    />
+                )};
+
                 <InputCheckBox
                     txtInput="Estacionamento"
                     btnState={estacionamento}
@@ -127,6 +165,39 @@ export default function formulario(){
                     iconName="user"
                     size={20}
                 />
+
+                {estacionamento == 'true' && (
+                    <InputComponent
+                        txtInput="Valor (estacionamento)"
+                        txtPlaceholder="Digite aqui"
+                        setState={setValorEstacionamento}
+                        value={valorEstacionamento}
+                        iconName="road"
+                        size={20}
+                    />
+                )}
+
+
+                <InputCheckBox
+                    txtInput="Viagem"
+                    btnState={viagem}
+                    setbtnState={setViagem}
+                    iconName="user"
+                    size={20}
+                />
+
+                {viagem == 'true' && (
+                    <InputComponent
+                        txtInput="Local (viagem)"
+                        txtPlaceholder="Digite aqui"
+                        setState={setLocalViagem}
+                        value={localViagem}
+                        iconName="road"
+                        size={20}
+                        style={{padding: 0, margin: 0}}
+                    />
+                )}
+
 
                 <InputCheckBox
                     txtInput="Inversor"
@@ -144,13 +215,38 @@ export default function formulario(){
                     size={20}
                 />
 
-                <InputCheckBox
-                    txtInput="Almoço"
-                    btnState={almoco}
-                    setbtnState={setAlmoco}
-                    iconName="user"
-                    size={20}
+                {zonaAzul == 'true' && (
+                    <InputComponent
+                        txtInput="Quantidade (zona azul)"
+                        txtPlaceholder="Digite aqui"
+                        setState={setLocalViagem}
+                        value={localViagem}
+                        iconName="road"
+                        size={20}
+                    />
+                )};
+
+                {zonaAzul == 'true' && (
+                    <InputComponent
+                        txtInput="Valor (zona azul)"
+                        txtPlaceholder="Digite aqui"
+                        setState={setLocalViagem}
+                        value={localViagem}
+                        iconName="road"
+                        size={20}
+                    />
+                )};
+
+                <ObsInput
+                    txtInput="Obs"
+                    txtPlaceholder="Digite aqui"
+                    setState={setLocalViagem}
+                    value={localViagem}
+                    iconName="road"
+                    size={20}    
                 />
+
+
 
                 <TouchableOpacity 
                     style={styles.btnEnviar}
@@ -200,7 +296,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         borderRadius: 4,
-        marginBottom: 60
+        marginBottom: 50
     },
     btnEnviarTxt:{
         color: 'black'

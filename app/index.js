@@ -8,7 +8,7 @@ import { colors } from '../colors';
 
 export default function index() {
 
-  const [usuario, setUsuario] = useState('emily');
+  const [usuario, setUsuario] = useState('felipe');
   const [senha, setSenha] = useState('123456789');
 
   const router = useRouter();
@@ -16,9 +16,9 @@ export default function index() {
   function handleLogin(){
     if(usuario.trim() === '' || senha.trim() === ''){
       Alert.alert("Erro, preencha todos os campos");
-      return
+      return;
     }
-    if(usuario.trim() === 'teste' && senha.trim() === '123456789'){
+    if(usuario.trim() === 'felipe' && senha.trim() === '123456789'){
       router.replace('./home');
     } else {
       Alert.alert("Usuário ou senha inválidos!");

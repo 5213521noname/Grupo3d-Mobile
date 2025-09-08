@@ -5,11 +5,11 @@ import { colors } from '../colors';
 export default function InputCheckBox({txtInput, btnState, setbtnState, iconName, size}){
 
     function pressYes(){
-        setbtnState('yes')
+        setbtnState('true')
     }
 
     function pressNo(){
-        setbtnState('no')
+        setbtnState('false')
     }
 
     return(
@@ -27,7 +27,7 @@ export default function InputCheckBox({txtInput, btnState, setbtnState, iconName
             <TouchableOpacity 
                 style={[
                     styles.checkBox,
-                    btnState == 'yes' && styles.checkBoxTrue
+                    btnState == 'true' && styles.checkBoxTrue
                 ]}
                 onPress={pressYes}
             >
@@ -37,7 +37,7 @@ export default function InputCheckBox({txtInput, btnState, setbtnState, iconName
             <TouchableOpacity 
                 style={[
                     styles.checkBox,
-                    btnState == 'no' && styles.checkBoxFalse
+                    btnState == 'false' && styles.checkBoxFalse
                 ]}
                 onPress={pressNo}
             >
