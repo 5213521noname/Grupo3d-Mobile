@@ -1,6 +1,6 @@
 import { useRouter } from 'expo-router';
 import { useState } from 'react';
-import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { KeyboardAvoidingView, Platform, ScrollView, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import { colors } from '../colors';
 import DateComponent from '../components/DateComponent';
 import InputCheckBox from '../components/InputCheckBox';
@@ -51,9 +51,14 @@ export default function formulario(){
     const router = useRouter();
 
     return(
-        <ScrollView style={styles.containerScroll}>
-            <View style={styles.containerView}>
-
+        <KeyboardAvoidingView 
+            behavior={Platform.OS === "ios" ? "padding" : "height"} 
+            style={{ flex: 1 }}
+        >
+            <ScrollView 
+                style={styles.containerScroll}
+                contentContainerStyle={styles.containerView} // APLICAÇÃO CORRETA DO ESTILO DE CONTEÚDO
+            >
                 <Text style={styles.txtRelatorio}>Relatório de serviço</Text>
 
                 <SelectPlaca
@@ -177,7 +182,6 @@ export default function formulario(){
                     />
                 )}
 
-
                 <InputCheckBox
                     txtInput="Viagem"
                     btnState={viagem}
@@ -197,7 +201,6 @@ export default function formulario(){
                         style={{padding: 0, margin: 0}}
                     />
                 )}
-
 
                 <InputCheckBox
                     txtInput="Inversor"
@@ -240,41 +243,39 @@ export default function formulario(){
                 <ObsInput
                     txtInput="Obs"
                     txtPlaceholder="Digite aqui"
-                    setState={setLocalViagem}
-                    value={localViagem}
+                    setState={setObs} // CORRIGIDO: usando o estado 'obs'
+                    value={obs} // CORRIGIDO: usando o estado 'obs'
                     iconName="road"
-                    size={20}    
+                    size={20}     
                 />
-
 
 
                 <TouchableOpacity 
                     style={styles.btnEnviar}
-                    >
+                >
                     <Text style={styles.btnEnviarTxt}>Enviar Relatório</Text>
                 </TouchableOpacity>
 
                 <TouchableOpacity 
                     onPress={() => router.back()} 
                     style={styles.btnVoltar}
-                    >
+                >
                     <Text style={styles.btnVoltarTxt}>Voltar</Text>
                 </TouchableOpacity>
             
-            </View>
-        </ScrollView>
+            </ScrollView>
+        </KeyboardAvoidingView>
     );
 }
 
 const styles = StyleSheet.create({
     containerScroll:{
         backgroundColor: 'black',
-        flex: 1,
     },
     containerView:{
         padding: 20,
         alignItems: 'center',
-        // flex: 1
+        flexGrow: 1, // Adicionado para garantir a rolagem
         paddingVertical: 50
     },
     btnVoltar:{
