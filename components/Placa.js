@@ -1,9 +1,9 @@
 import { FontAwesome } from '@expo/vector-icons';
 import { useState } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { colors } from '../colors';
+import { colors } from '../../colors';
 
-export default function SelectPlaca({iconName, size, placa, setPlaca}){
+export default function Placa({iconName, size, placa, setPlaca}){
 
     const [exibir, setExibir] = useState(false);
 
