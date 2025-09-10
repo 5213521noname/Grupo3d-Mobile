@@ -6,7 +6,7 @@ import logo from '../assets/images/logo.png';
 import { colors } from '../colors';
 
 
-export default function index() {
+export default function Index() {
 
   const [usuario, setUsuario] = useState('felipe');
   const [senha, setSenha] = useState('123456789');
@@ -19,7 +19,7 @@ export default function index() {
       return;
     }
     if(usuario.trim() === 'felipe' && senha.trim() === '123456789'){
-      router.replace('./home');
+      router.replace('./Home');
     } else {
       Alert.alert("Usuário ou senha inválidos!");
     }

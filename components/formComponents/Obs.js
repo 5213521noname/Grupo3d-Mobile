@@ -1,6 +1,6 @@
 import { FontAwesome } from '@expo/vector-icons';
 import { StyleSheet, Text, TextInput, View } from 'react-native';
-import { colors } from '../colors';
+import { colors } from '../../colors';
 
 export default function ObsInput({txtInput, txtPlaceholder, setState, value, iconName, size}){
     return(

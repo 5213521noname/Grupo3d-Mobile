@@ -1,16 +1,30 @@
 import { FontAwesome } from '@expo/vector-icons';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { useState } from 'react';
-import { Platform, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Alert, Platform, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { colors } from '../colors';
 
     export default function DateComponent({date, setDate, iconName, size, txtInput}){
 
         const [showPicker, setShowPicker] = useState(false);
+        const [showDate, setShowDate] = useState(date)
 
         function novaData(event, selectedDate){
             setDate(selectedDate);
+
             if(Platform.OS == 'android'){
+                setShowPicker(false);
+            }
+        }
+
+        function fecharDatePicker(date){
+            let dataAtual = new Date();
+
+            if(date > dataAtual){
+                Alert.alert("A data nao pode ser maior que a atual");
+            }
+            else {
+                setShowDate(date)
                 setShowPicker(false);
             }
         }
@@ -33,7 +47,7 @@ import { colors } from '../colors';
                     onPress={() => setShowPicker(true)} 
                     style={styles.dateIni}
                 >
-                    <Text>{`${date.toLocaleDateString()}`}</Text>
+                    <Text>{`${showDate.toLocaleDateString()}`}</Text>
                 </TouchableOpacity>
                 
                 {showPicker && (
@@ -49,7 +63,7 @@ import { colors } from '../colors';
                         {Platform.OS == 'ios' && (
                             <TouchableOpacity 
                                 style={styles.btnDateTimePicker}
-                                onPress={() => {setShowPicker(false)}}
+                                onPress={() => fecharDatePicker(date)}
                             >
                                 <Text style={styles.txtDateTimePicker}>Selecionar data</Text>
                             </TouchableOpacity>

@@ -3,12 +3,12 @@ import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import logo from '../assets/images/logo.png';
 import { colors } from '../colors';
 
-export default function home(){
+export default function Home(){
 
     const router = useRouter();
     
     function novoRelatorio(){
-        router.push('./formulario');
+        router.push('./Formulario');
     }
 
     return(
