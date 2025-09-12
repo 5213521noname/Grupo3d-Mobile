@@ -7,24 +7,34 @@ import { colors } from '../colors';
     export default function DateComponent({date, setDate, iconName, size, txtInput}){
 
         const [showPicker, setShowPicker] = useState(false);
-        const [showDate, setShowDate] = useState(date)
+        const [showDate, setShowDate] = useState(new Date());
+        const dataAtual = new Date();
 
         function novaData(event, selectedDate){
-            setDate(selectedDate);
-
             if(Platform.OS == 'android'){
                 setShowPicker(false);
+
+                if(selectedDate > dataAtual){
+                    Alert.alert("A data nao pode ser maior que a atual");
+                }
+                else {
+                    setDate(selectedDate);
+                    setShowDate(selectedDate);
+                }
+            } 
+            
+            if(Platform.OS == 'ios'){
+                setDate(selectedDate);
             }
         }
 
-        function fecharDatePicker(date){
-            let dataAtual = new Date();
+        function fecharDatePickerIOS(){
 
             if(date > dataAtual){
                 Alert.alert("A data nao pode ser maior que a atual");
             }
             else {
-                setShowDate(date)
+                setShowDate(date);
                 setShowPicker(false);
             }
         }
@@ -63,7 +73,7 @@ import { colors } from '../colors';
                         {Platform.OS == 'ios' && (
                             <TouchableOpacity 
                                 style={styles.btnDateTimePicker}
-                                onPress={() => fecharDatePicker(date)}
+                                onPress={fecharDatePickerIOS}
                             >
                                 <Text style={styles.txtDateTimePicker}>Selecionar data</Text>
                             </TouchableOpacity>
@@ -111,7 +121,8 @@ import { colors } from '../colors';
             alignItems: 'center',
             paddingTop: 20,
             marginVertical: 20,
-            borderRadius: 10
+            borderRadius: 10,
+            display: Platform.OS == 'android' ? 'none' : 'flex'
         },
         btnDateTimePicker:{
             backgroundColor: 'white',

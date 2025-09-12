@@ -1,5 +1,5 @@
-import { TouchableOpacity, StyleSheet, Text } from "react-native"; 
 import { useRouter } from "expo-router";
+import { StyleSheet, Text, TouchableOpacity } from "react-native";
 
 export default function BtnVoltar(){
 
@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
     btnVoltar:{
         height: 46,
         backgroundColor: 'white',
-        width: 90,
+        width: '30%',
         justifyContent: 'center',
         alignItems: 'center',
         borderRadius: 4,

@@ -8,7 +8,7 @@ export default function Home(){
     const router = useRouter();
     
     function novoRelatorio(){
-        router.push('./Formulario');
+        router.push('./formulario');
     }
 
     return(
@@ -40,12 +40,12 @@ const styles = StyleSheet.create({
     textNovoRelatorio:{
         fontWeight: 'bold',
         color: 'white',
-        fontSize: 15
+        fontSize: 16
     },
     btnNovoRelatorio:{
         backgroundColor: colors.orange,
-        height: 50,
-        width: '50%',
+        height: 60,
+        width: '55%',
         justifyContent: 'center',
         alignItems: 'center',
         borderRadius: 7,

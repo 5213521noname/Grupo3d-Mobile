@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
     btnEnviar:{
         height: 46,
         backgroundColor: 'white',
-        width: 250,
+        width: '65%',
         justifyContent: 'center',
         alignItems: 'center',
         borderRadius: 4,

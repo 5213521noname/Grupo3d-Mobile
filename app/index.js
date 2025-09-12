@@ -19,7 +19,7 @@ export default function Index() {
       return;
     }
     if(usuario.trim() === 'felipe' && senha.trim() === '123456789'){
-      router.replace('./Home');
+      router.replace('./home');
     } else {
       Alert.alert("Usuário ou senha inválidos!");
     }
