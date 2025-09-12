@@ -5,7 +5,7 @@ export default function DataFim({dateFim, setDateFim}){
         <DateComponent
             date={dateFim}
             setDate={setDateFim}
-            iconName="clock-o"
+            iconName="calendar"
             txtInput="Data Final"
             size={20}
         />

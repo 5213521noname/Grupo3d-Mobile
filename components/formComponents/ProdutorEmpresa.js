@@ -7,7 +7,7 @@ export default function ProdutorEmpresa({produtorEmpresa, setProdutorEmpresa}){
             txtPlaceholder="Digite aqui"
             setState={setProdutorEmpresa}
             value={produtorEmpresa}
-            iconName="user"
+            iconName="building"
             size={20}
         />
     );

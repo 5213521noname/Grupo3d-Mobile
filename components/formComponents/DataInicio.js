@@ -5,7 +5,7 @@ export default function DataInicio({dateIni, setDateIni}){
         <DateComponent
             date={dateIni}
             setDate={setDateIni}
-            iconName="clock-o"
+            iconName="calendar"
             txtInput="Data início"
             size={20}
         />

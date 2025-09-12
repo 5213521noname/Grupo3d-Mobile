@@ -1,4 +1,4 @@
-import TimeComponent from '../TimeComponent'
+import TimeComponent from '../TimeComponent';
 
 export default function HoraInicio({timeIni, setTimeIni}){
     return(

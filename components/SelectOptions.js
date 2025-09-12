@@ -1,21 +1,14 @@
 import { FontAwesome } from '@expo/vector-icons';
 import { useState } from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { colors } from '../colors';
 
-export default function Placa({state, setState}){
+export default function SelectOptions({object, nameSelect ,state, setState, txtContainer, setOutros}){
 
     const [exibir, setExibir] = useState(false);
 
-    const placas = [
-        { placa: 'Placa 1' },
-        { placa: 'Placa 2' },
-        { placa: 'Placa 3' },
-        { placa: 'Placa 4' },
-    ]
-
-    function selectPlaca(item, index){
-        setState(item.placa);
+    function select(item, index){
+        setState(item[nameSelect]);
         setExibir(false);
     }
 
@@ -28,30 +21,43 @@ export default function Placa({state, setState}){
                     color="rgba(255, 255, 255, 1)"
                 />
 
-                <Text style={styles.txtIcon}>Placa do carro</Text>
+                <Text style={styles.txtIcon}>{txtContainer}</Text>
             </View>
 
             {!exibir && (
+                <View>
                 <TouchableOpacity 
-                    style={styles.btnSetPlaca}
+                    style={styles.btnSetValue}
                     onPress={() => setExibir(true)}
                 >
-                <Text style={styles.btnSetPlacaTxt}>{state}</Text>
+                <Text style={styles.btnSetValueTxt}>{state}</Text>
                 </TouchableOpacity>
+
+                {state == 'Outros' && (
+                    <TextInput
+                        style={styles.outrosInput}
+                        placeholder="Digite aqui: "
+                        placeholderTextColor={'rgba(0, 0, 0, 0.3)'}
+                        onChangeText={(texto) => setOutros(texto)}
+                    />
+                )}
+
+                </View>
             )}
             
 
             {exibir && (
                 <View>
 
-                {placas.map((item, index) => {
-                    if(state != item.placa){
+                {object.map((item, index) => {
+                    if(state != item[nameSelect]){
                         return(
                             <TouchableOpacity 
-                                onPress={() => selectPlaca(item, index)}
-                                style={styles.btnSelectPlacas}
+                                key={index + 1}
+                                onPress={() => select(item, index)}
+                                style={styles.btnSelect}
                             >
-                                <Text style={styles.txtSelectPlacas}>{item.placa}</Text>
+                                <Text style={styles.txtSelect}>{item[nameSelect]}</Text>
                             </TouchableOpacity> 
                         );
                     }          
@@ -78,7 +84,7 @@ const styles = StyleSheet.create({
         marginBottom: 6,
         marginTop: 5
     },
-    btnSetPlaca:{
+    btnSetValue:{
         backgroundColor: 'white',
         alignItems: 'center',
         justifyContent: 'center',
@@ -86,7 +92,7 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         marginTop: 5,
     },
-    btnSetPlacaTxt:{
+    btnSetValueTxt:{
         color: 'black',
     },
     txtIcon:{
@@ -95,7 +101,7 @@ const styles = StyleSheet.create({
         marginLeft: 9,
         color: 'white'
     },
-    btnSelectPlacas:{
+    btnSelect:{
         width: '100%',
         height: 42,
         marginVertical: 3.5,
@@ -104,7 +110,14 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center'
     },
-    txtSelectPlacas:{
+    txtSelect:{
         color: 'black'
+    },
+    outrosInput:{
+        backgroundColor: 'white',
+        height: '55',
+        marginTop: 10,
+        borderRadius: 5,
+        paddingLeft: 10
     }
 });

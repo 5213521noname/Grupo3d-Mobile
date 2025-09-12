@@ -1,15 +1,15 @@
-import { View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import InputCheckBox from "../InputCheckBox";
 import InputComponent from "../InputComponent";
 
-export default function Pedagio({parceiro, pedagio, setPedagio}){
+export default function Pedagio({ pedagio, setPedagio, parceiro, valorPedagioParceiro ,setValorPedagioParceiro}){
     return(
         <View style={styles.container}>
             <InputCheckBox
                 txtInput="Pedágio"
                 btnState={pedagio}
                 setbtnState={setPedagio}
-                iconName="user"
+                iconName="road"
                 size={20}
             />
         
@@ -22,7 +22,7 @@ export default function Pedagio({parceiro, pedagio, setPedagio}){
                     iconName="road"
                     size={20}
                 />
-            )};
+            )}
         </View>
     ); 
 }

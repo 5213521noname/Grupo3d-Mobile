@@ -2,26 +2,26 @@ import { FontAwesome } from '@expo/vector-icons';
 import { StyleSheet, Text, TextInput, View } from 'react-native';
 import { colors } from '../../colors';
 
-export default function ObsInput({txtInput, txtPlaceholder, setState, value, iconName, size}){
+export default function Obs({setObs, obs}){
     return(
         <View style={styles.container}>
 
             <View style={styles.logoTxt}>
                 <FontAwesome
-                name={iconName}
-                size={size}
+                name="user"
+                size={19}
                 color="rgba(255, 255, 255, 1)"
                 />
 
-                <Text style={styles.txt}>{txtInput}</Text>
+                <Text style={styles.txt}>{"Observações"}</Text>
             </View>
 
 
             <TextInput
-                placeholder={txtPlaceholder}
-                onChangeText={setState}
+                placeholder={"Digite aqui: "}
+                onChangeText={setObs}
                 style={styles.input}
-                value={value}
+                value={obs}
                 placeholderTextColor="rgba(0, 0, 0, 0.2)"
                 multiline={true}
             />
