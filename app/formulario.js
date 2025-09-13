@@ -3,6 +3,7 @@ import { Platform, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { colors } from '../colors';
+import Alimentacao from '../components/formComponents/Alimentacao';
 import Atribuicao from '../components/formComponents/Atribuicao';
 import BtnEnviar from '../components/formComponents/BtnEnviar';
 import BtnVoltar from '../components/formComponents/BtnVoltar';
@@ -50,6 +51,12 @@ export default function Formulario(){
     const [setor, setSetor] = useState("Selecionar setor");
     const [outrosAtribuicao, setOutrosAtribuicao] = useState('');
     const [outrosSetor, setOutrosSetor] = useState('');
+
+    const [alimentacao, setAlimentacao] = useState('');
+
+    const [arrayAlimentacao, setArrayAlimentacao] = useState([
+        {id: 1, refeicao: '', valor: ''},
+    ]);
 
     return(
         <SafeAreaView style={styles.containerSafeView}>
@@ -147,6 +154,19 @@ export default function Formulario(){
                                 setValorZonaAzul={setValorZonaAzul}
 
                             />
+
+                            <Alimentacao
+                                state={alimentacao}
+                                setState={setAlimentacao}
+                                array={arrayAlimentacao}
+                                setArray={setArrayAlimentacao}
+                            />
+
+                            {arrayAlimentacao.map(item => {
+                                return(
+                                    <Text>{item.id}</Text>
+                                );
+                            })}
 
                             <Inversor
                                 inversor={inversor}
