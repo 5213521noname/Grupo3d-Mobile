@@ -58,9 +58,17 @@ import InputCheckBox from '../InputCheckBox';
                     size={19}
                 />
 
+                
+
                 {(state == 'true') && (
 
                     <View>
+
+                        <View style={styles.refValueTitleContainer}>
+                            <Text style={styles.txtRefValue}>Refeição</Text>
+                            <Text style={styles.txtRefValue}>Valor</Text>
+                        </View>
+
                             {array.map((item, index) => {
                                 return(
 
@@ -68,23 +76,22 @@ import InputCheckBox from '../InputCheckBox';
                                         style={styles.refeicaoValor}
                                         key={index + 1}
                                     >
+
                                         <TextInput
                                             style={[
                                                 styles.inputRefeicao,
                                                 styles.borderRight
                                             ]}
-                                            placeholder={item.refeicao}
-                                            placeholderTextColor={'black'}
                                             onChangeText={(text) => changeRef(text, item.id, 'refeicao')}
+                                            value={item.refeicao}
                                         />
 
                                     <View style={styles.containerValor}>
                                         <Text>R$: </Text>
                                         <TextInput
                                             style={styles.inputValor}
-                                            placeholder={item.valor}
-                                            placeholderTextColor={'black'}
                                             onChangeText={(text) => changeRef(text, item.id, 'valor')}
+                                            value={item.valor}
                                         />
                                     </View>
                                     
@@ -146,7 +153,7 @@ import InputCheckBox from '../InputCheckBox';
         containerValor:{
             flexDirection: 'row',
             alignItems: 'center',
-            paddingLeft: 20,
+            paddingLeft: 25,
             width: '50%'
         },
         addRef:{
@@ -180,6 +187,22 @@ import InputCheckBox from '../InputCheckBox';
         txtRemoveRef:{
             color: 'white',
             fontWeight: 'bold'
-        }
+        },
+        refValueTitleContainer:{
+            backgroundColor: 'black',
+            flexDirection: 'row',
+            width: '100%',
+            alignItems: 'center',
+            justifyContent: 'center',
+            height: 35,
+            borderTopLeftRadius: 4,
+            borderTopRightRadius: 4
+        },
+        txtRefValue:{
+            color: 'white',
+            width: '50%',
+            textAlign: 'center',
+            fontWeight: 'bold'
+        },
 
     })

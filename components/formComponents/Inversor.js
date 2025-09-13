@@ -6,7 +6,7 @@ export default function Inversor({inversor, setInversor}){
             txtInput="Inversor"
             btnState={inversor}
             setbtnState={setInversor}
-            iconName="user"
+            iconName="bolt"
             size={20}
         />
     );

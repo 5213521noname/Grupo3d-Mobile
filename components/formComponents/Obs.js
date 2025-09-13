@@ -8,8 +8,8 @@ export default function Obs({setObs, obs}){
 
             <View style={styles.logoTxt}>
                 <FontAwesome
-                name="user"
-                size={19}
+                name="file"
+                size={17}
                 color="rgba(255, 255, 255, 1)"
                 />
 

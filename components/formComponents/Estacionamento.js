@@ -9,8 +9,8 @@ export default function Estacionamento({estacionamento, setEstacionamento, valor
                 txtInput="Estacionamento"
                 btnState={estacionamento}
                 setbtnState={setEstacionamento}
-                iconName="user"
-                size={20}
+                iconName="car"
+                size={18}
             />
         
             {estacionamento == 'true' && (
@@ -19,8 +19,8 @@ export default function Estacionamento({estacionamento, setEstacionamento, valor
                     txtPlaceholder="Digite aqui"
                     setState={setValorEstacionamento}
                     value={valorEstacionamento}
-                    iconName="road"
-                    size={20}
+                    iconName="money"
+                    size={18}
                 />
             )}
         </View>

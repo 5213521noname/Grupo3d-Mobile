@@ -23,8 +23,8 @@ export default function Placa({state, setState}){
         <View style={styles.container}>
             <View style={styles.iconTxt}>
                 <FontAwesome
-                    name="user"
-                    size={19}
+                    name="car"
+                    size={18}
                     color="rgba(255, 255, 255, 1)"
                 />
 
