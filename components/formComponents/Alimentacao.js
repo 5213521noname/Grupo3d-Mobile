@@ -1,11 +1,11 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Alert, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import InputCheckBox from '../InputCheckBox';
 
 
     export default function Alimentacao({state, setState, array, setArray}){
 
-        const [contador, setContador] = useState(2);
+        const [contador, setContador] = useState(array[array.length - 1].id + 1);
 
         function adicionarRef(){
             const novoItem = {
@@ -29,6 +29,25 @@ import InputCheckBox from '../InputCheckBox';
             }
         }
 
+        function changeRef(text, id, campo){
+            const arrayAtualizado = array.map(item => {
+                if(item.id == id){
+                    return { ...item, [campo]: text };
+                }
+                else {
+                    return item;
+                }
+            });
+            setArray(arrayAtualizado);
+        }
+
+
+        useEffect(() => {
+            setContador(array[array.length - 1].id + 1);
+        }, [
+            array
+        ]);
+
         return(
             <View style={styles.containerView}>
                 <InputCheckBox
@@ -42,27 +61,30 @@ import InputCheckBox from '../InputCheckBox';
                 {(state == 'true') && (
 
                     <View>
-                        {array.map((item, index) => {
-                            return(
+                            {array.map((item, index) => {
+                                return(
 
-                                <View 
-                                    style={styles.refeicaoValor}
-                                    key={index + 1}
-                                >
-                                    <TextInput
-                                        style={[
-                                            styles.inputRefeicao,
-                                            styles.borderRight
-                                        ]}
-                                        placeholder="Refeição"
-                                        placeholderTextColor={'black'}
-                                    />
+                                    <View 
+                                        style={styles.refeicaoValor}
+                                        key={index + 1}
+                                    >
+                                        <TextInput
+                                            style={[
+                                                styles.inputRefeicao,
+                                                styles.borderRight
+                                            ]}
+                                            placeholder={item.refeicao}
+                                            placeholderTextColor={'black'}
+                                            onChangeText={(text) => changeRef(text, item.id, 'refeicao')}
+                                        />
+
                                     <View style={styles.containerValor}>
                                         <Text>R$: </Text>
                                         <TextInput
                                             style={styles.inputValor}
-                                            placeholder="Valor"
+                                            placeholder={item.valor}
                                             placeholderTextColor={'black'}
+                                            onChangeText={(text) => changeRef(text, item.id, 'valor')}
                                         />
                                     </View>
                                     
