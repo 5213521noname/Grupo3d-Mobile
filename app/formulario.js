@@ -1,5 +1,6 @@
-import { useState } from 'react';
-import { Platform, ScrollView, StyleSheet, Text, View } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useEffect, useState } from 'react';
+import { Alert, Platform, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { colors } from '../colors';
@@ -16,6 +17,7 @@ import Inversor from '../components/formComponents/Inversor';
 import Job from '../components/formComponents/Job';
 import KmFinal from '../components/formComponents/KmFinal';
 import KmInicial from '../components/formComponents/KmInicial';
+import ModalBack from '../components/formComponents/ModalBack';
 import MotoristaParceiro from '../components/formComponents/MotoristaParceiro';
 import Obs from '../components/formComponents/Obs';
 import Pedagio from '../components/formComponents/Pedagio';
@@ -41,11 +43,11 @@ export default function Formulario(){
     const [kmFim, setKmFim] = useState('');
     const [zonaAzul, setZonaAzul] = useState('');
     const [qtdZonaAzul, setQtdZonaAzul] = useState('');
-    const [valorZonaAzul, setValorZonaAzul] = useState('');
+    const [valorZonaAzul, setValorZonaAzul] = useState(0);
     const [inversor, setInversor] = useState('');
     const [pedagio, setPedagio] = useState('');
     const [parceiro, setParceiro] = useState('');
-    const [valorPedagioParceiro, setValorPedagioParceiro] = useState('');
+    const [valorPedagioParceiro, setValorPedagioParceiro] = useState(0);
     const [placa, setPlaca] = useState("Selecione a placa");
     const [atribuicao, setAtribuicao] = useState("Selecionar atribuição");
     const [setor, setSetor] = useState("Selecionar setor");
@@ -57,6 +59,94 @@ export default function Formulario(){
     const [arrayAlimentacao, setArrayAlimentacao] = useState([
         {id: 1, refeicao: '', valor: ''},
     ]);
+
+    const [showModal, setShowModal] = useState(false);
+
+
+    const saveData = async () => {
+        try{
+            const objectData = {
+                dateIni: dateIni,
+                dateFim: dateFim,
+                obs: obs,
+                estacionamento: estacionamento,
+                valorEstacionamento: valorEstacionamento,
+                horaInicio: horaInicio,
+                horaFim: horaFim,
+                job: job,
+                produtorEmpresa: produtorEmpresa,
+                produtorPessoa: produtorPessoa,
+                kmIni: kmIni,
+                kmFim: kmFim,
+                zonaAzul: zonaAzul,
+                qtdZonaAzul: qtdZonaAzul,
+                valorZonaAzul: valorZonaAzul,
+                inversor: inversor,
+                pedagio: pedagio,
+                parceiro: parceiro,
+                valorPedagioParceiro: valorPedagioParceiro,
+                placa: placa,
+                atribuicao: atribuicao,
+                setor: setor,
+                outrosAtribuicao: outrosAtribuicao,
+                outrosSetor: outrosSetor,
+                alimentacao: alimentacao,
+                arrayAlimentacao: arrayAlimentacao,
+            }
+            const jsonValue = JSON.stringify(objectData);
+            await AsyncStorage.setItem('@dadosForm', jsonValue)
+            Alert.alert("Salvo com sucesso!");
+        } 
+        catch(e) {
+            Alert.alert(`Erro ${e}`);
+        }
+    };
+
+
+    const loadData = async () => {
+        try{
+            const jsonValue = await AsyncStorage.getItem('@dadosForm');
+            if(jsonValue != null){
+                const loadedData = JSON.parse(jsonValue)
+
+                setDateIni(new Date(loadedData.dateIni))
+                setDateFim(new Date(loadedData.dateFim))
+                setObs(loadedData.obs)
+                setEstacionamento(loadedData.estacionamento)
+                setValorEstacionamento(loadedData.valorEstacionamento)
+                setHoraInicio(new Date(loadedData.horaInicio))
+                setHoraFim(new Date(loadedData.horaFim))
+                setJob(loadedData.job)
+                setProdutorEmpresa(loadedData.produtorEmpresa)
+                setProdutorPessoa(loadedData.produtorPessoa)
+                setKmIni(loadedData.kmIni)
+                setKmFim(loadedData.kmFim)
+                setZonaAzul(loadedData.zonaAzul)
+                setQtdZonaAzul(loadedData.qtdZonaAzul)
+                setValorZonaAzul(loadedData.valorZonaAzul)
+                setInversor(loadedData.inversor)
+                setPedagio(loadedData.pedagio)
+                setParceiro(loadedData.parceiro)
+                setValorPedagioParceiro(loadedData.valorPedagioParceiro)
+                setPlaca(loadedData.placa)
+                setAtribuicao(loadedData.atribuicao)
+                setSetor(loadedData.setor)
+                setOutrosAtribuicao(loadedData.outrosAtribuicao)
+                setOutrosSetor(loadedData.outrosSetor)
+                setAlimentacao(loadedData.alimentacao)
+                setArrayAlimentacao(loadedData.arrayAlimentacao)
+            }
+        }
+        catch(e){
+            Alert.alert(`Erro ${e}`);
+        }
+    }
+
+
+    useEffect(() => {
+        loadData();
+    }, []);
+
 
     return(
         <SafeAreaView style={styles.containerSafeView}>
@@ -162,12 +252,6 @@ export default function Formulario(){
                                 setArray={setArrayAlimentacao}
                             />
 
-                            {arrayAlimentacao.map(item => {
-                                return(
-                                    <Text>{item.id}</Text>
-                                );
-                            })}
-
                             <Inversor
                                 inversor={inversor}
                                 setInversor={setInversor}
@@ -183,6 +267,7 @@ export default function Formulario(){
                                 obs={obs}
                                 setObs={setObs}
                             />
+
                         </View>
                     </View>
                 
@@ -191,13 +276,22 @@ export default function Formulario(){
 
 
             <View style={styles.containerBtns}>
-                <BtnVoltar/>
+                <BtnVoltar
+                    showModal={showModal}
+                    setShowModal={setShowModal}
+                />
                 <BtnEnviar/>
             </View>
 
+                <ModalBack
+                    visible={showModal}
+                    setShowModal={setShowModal}
+                    saveData={saveData}
+                />
+
         </SafeAreaView>
         
-    );
+    )
 }
 
 const styles = StyleSheet.create({
@@ -240,4 +334,4 @@ const styles = StyleSheet.create({
         borderColor: 'white',
         borderStyle: 'solid'
     }
-});
+})

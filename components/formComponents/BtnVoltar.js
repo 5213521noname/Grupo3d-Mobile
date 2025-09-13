@@ -1,17 +1,14 @@
-import { useRouter } from "expo-router";
 import { StyleSheet, Text, TouchableOpacity } from "react-native";
 
-export default function BtnVoltar(){
-
-    const router = useRouter();
+export default function BtnVoltar({showModal, setShowModal}){
 
     return(
-        <TouchableOpacity 
-            onPress={() => router.back()} 
-            style={styles.btnVoltar}
-        >
-            <Text style={styles.btnVoltarTxt}>Voltar</Text>
-        </TouchableOpacity>
+            <TouchableOpacity 
+                style={styles.btnVoltar}
+                onPress={() => setShowModal(!showModal)}
+            >
+                <Text style={styles.btnVoltarTxt}>Voltar</Text>
+            </TouchableOpacity>
     );
 }
 

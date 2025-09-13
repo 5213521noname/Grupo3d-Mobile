@@ -1,6 +1,7 @@
-    import { useState } from 'react';
-import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { useState } from 'react';
+import { Alert, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import InputCheckBox from '../InputCheckBox';
+
 
     export default function Alimentacao({state, setState, array, setArray}){
 
@@ -13,22 +14,23 @@ import InputCheckBox from '../InputCheckBox';
                 valor: ''
             }
 
-            const arrayTemporario = [...array, novoItem];
-
-            setArray(arrayTemporario);
-
             setContador(contador + 1);
+
+            const arrayTemporario = [...array, novoItem];
+            setArray(arrayTemporario);
         }
 
-        function removerRef(idRemover){
-            const arrayTemporario = array.filter(item => item.id != idRemover);
-            setArray(arrayTemporario);
-            setContador(contador - 1);
-            
+        function removerRef(){
+            if(array.length > 1){
+                setArray(array.slice(0, -1));
+            } 
+            else {
+                Alert.alert("O valor mínimo é de uma refeição!");
+            }
         }
 
         return(
-            <View>
+            <View style={styles.containerView}>
                 <InputCheckBox
                     txtInput="Alimentação"
                     btnState={state}
@@ -43,7 +45,10 @@ import InputCheckBox from '../InputCheckBox';
                         {array.map((item, index) => {
                             return(
 
-                                <View style={styles.refeicaoValor}>
+                                <View 
+                                    style={styles.refeicaoValor}
+                                    key={index + 1}
+                                >
                                     <TextInput
                                         style={[
                                             styles.inputRefeicao,
@@ -62,7 +67,6 @@ import InputCheckBox from '../InputCheckBox';
                                     </View>
                                     
                                 </View>
-                                
                             )
                         })}
 
@@ -70,7 +74,7 @@ import InputCheckBox from '../InputCheckBox';
 
                             <TouchableOpacity 
                                 style={styles.removeRef}
-                                onPress={() => removerRef(array.length)}
+                                onPress={() => removerRef()}
                             >
                                 <Text style={styles.txtRemoveRef}>Remover</Text>
                             </TouchableOpacity>
@@ -84,16 +88,16 @@ import InputCheckBox from '../InputCheckBox';
                         </View> 
 
                     </View>
-                )};
-
-
-
+                )}
             </View>
             
-        );
-    };
+        )
+    }
 
     const styles = StyleSheet.create({
+        containerView:{
+            width: '100%'
+        },
         refeicaoValor:{
             width: '100%',
             backgroundColor: 'red',
@@ -156,4 +160,4 @@ import InputCheckBox from '../InputCheckBox';
             fontWeight: 'bold'
         }
 
-    });
+    })
