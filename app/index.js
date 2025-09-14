@@ -18,7 +18,7 @@ export default function Index() {
       Alert.alert("Erro, preencha todos os campos");
       return;
     }
-    if(usuario.trim() === 'felipe' && senha.trim() === '123456789'){
+    if(usuario.trim() === 'teste' && senha.trim() === '123456789'){
       router.replace('./home');
     } else {
       Alert.alert("Usuário ou senha inválidos!");

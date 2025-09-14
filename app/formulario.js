@@ -1,6 +1,5 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useEffect, useState } from 'react';
-import { Alert, Platform, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { Platform, StyleSheet, Text, View } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { colors } from '../colors';
@@ -26,9 +25,11 @@ import ProdutorPessoa from '../components/formComponents/ProdutorPessoa';
 import Setor from '../components/formComponents/Setor';
 import ZonaAzul from '../components/formComponents/zonaAzul';
 import PlacaCarro from '../components/Placa';
+import { loadData, saveData } from '../saveLoadData/saveDataLoad';
 
 export default function Formulario(){
 
+    //STATES
     const [dateIni, setDateIni] = useState(new Date());
     const [dateFim, setDateFim] = useState(new Date());
     const [obs, setObs] = useState('');
@@ -53,98 +54,82 @@ export default function Formulario(){
     const [setor, setSetor] = useState("Selecionar setor");
     const [outrosAtribuicao, setOutrosAtribuicao] = useState('');
     const [outrosSetor, setOutrosSetor] = useState('');
-
     const [alimentacao, setAlimentacao] = useState('');
-
     const [arrayAlimentacao, setArrayAlimentacao] = useState([
         {id: 1, refeicao: '', valor: ''},
     ]);
-
     const [showModal, setShowModal] = useState(false);
+    //FIM STATES
+     
+    const objectData = {
+        dateIni: dateIni,
+        dateFim: dateFim,
+        obs: obs,
+        estacionamento: estacionamento,
+        valorEstacionamento: valorEstacionamento,
+        horaInicio: horaInicio,
+        horaFim: horaFim,
+        job: job,
+        produtorEmpresa: produtorEmpresa,
+        produtorPessoa: produtorPessoa,
+        kmIni: kmIni,
+        kmFim: kmFim,
+        zonaAzul: zonaAzul,
+        qtdZonaAzul: qtdZonaAzul,
+        valorZonaAzul: valorZonaAzul,
+        inversor: inversor,
+        pedagio: pedagio,
+        parceiro: parceiro,
+        valorPedagioParceiro: valorPedagioParceiro,
+        placa: placa,
+        atribuicao: atribuicao,
+        setor: setor,
+        outrosAtribuicao: outrosAtribuicao,
+        outrosSetor: outrosSetor,
+        alimentacao: alimentacao,
+        arrayAlimentacao: arrayAlimentacao,
+    }
 
+    const objectSets = {
+        setDateIni,
+        setDateFim,
+        setObs,
+        setEstacionamento,
+        setValorEstacionamento,
+        setHoraInicio,
+        setHoraFim,
+        setJob,
+        setProdutorEmpresa,
+        setProdutorPessoa,
+        setKmIni,
+        setKmFim,
+        setZonaAzul,
+        setQtdZonaAzul,
+        setValorZonaAzul,
+        setInversor,
+        setPedagio,
+        setParceiro,
+        setValorPedagioParceiro,
+        setPlaca,
+        setAtribuicao,
+        setSetor,
+        setOutrosAtribuicao,
+        setOutrosSetor,
+        setAlimentacao,
+        setArrayAlimentacao
+    }
 
-    const saveData = async () => {
-        try{
-            const objectData = {
-                dateIni: dateIni,
-                dateFim: dateFim,
-                obs: obs,
-                estacionamento: estacionamento,
-                valorEstacionamento: valorEstacionamento,
-                horaInicio: horaInicio,
-                horaFim: horaFim,
-                job: job,
-                produtorEmpresa: produtorEmpresa,
-                produtorPessoa: produtorPessoa,
-                kmIni: kmIni,
-                kmFim: kmFim,
-                zonaAzul: zonaAzul,
-                qtdZonaAzul: qtdZonaAzul,
-                valorZonaAzul: valorZonaAzul,
-                inversor: inversor,
-                pedagio: pedagio,
-                parceiro: parceiro,
-                valorPedagioParceiro: valorPedagioParceiro,
-                placa: placa,
-                atribuicao: atribuicao,
-                setor: setor,
-                outrosAtribuicao: outrosAtribuicao,
-                outrosSetor: outrosSetor,
-                alimentacao: alimentacao,
-                arrayAlimentacao: arrayAlimentacao,
-            }
-            const jsonValue = JSON.stringify(objectData);
-            await AsyncStorage.setItem('@dadosForm', jsonValue)
-            Alert.alert("Salvo com sucesso!");
-        } 
-        catch(e) {
-            Alert.alert(`Erro ${e}`);
-        }
-    };
+    const handleSave = async () => {
+        await saveData(objectData);
+    }
 
-
-    const loadData = async () => {
-        try{
-            const jsonValue = await AsyncStorage.getItem('@dadosForm');
-            if(jsonValue != null){
-                const loadedData = JSON.parse(jsonValue)
-
-                setDateIni(new Date(loadedData.dateIni))
-                setDateFim(new Date(loadedData.dateFim))
-                setObs(loadedData.obs)
-                setEstacionamento(loadedData.estacionamento)
-                setValorEstacionamento(loadedData.valorEstacionamento)
-                setHoraInicio(new Date(loadedData.horaInicio))
-                setHoraFim(new Date(loadedData.horaFim))
-                setJob(loadedData.job)
-                setProdutorEmpresa(loadedData.produtorEmpresa)
-                setProdutorPessoa(loadedData.produtorPessoa)
-                setKmIni(loadedData.kmIni)
-                setKmFim(loadedData.kmFim)
-                setZonaAzul(loadedData.zonaAzul)
-                setQtdZonaAzul(loadedData.qtdZonaAzul)
-                setValorZonaAzul(loadedData.valorZonaAzul)
-                setInversor(loadedData.inversor)
-                setPedagio(loadedData.pedagio)
-                setParceiro(loadedData.parceiro)
-                setValorPedagioParceiro(loadedData.valorPedagioParceiro)
-                setPlaca(loadedData.placa)
-                setAtribuicao(loadedData.atribuicao)
-                setSetor(loadedData.setor)
-                setOutrosAtribuicao(loadedData.outrosAtribuicao)
-                setOutrosSetor(loadedData.outrosSetor)
-                setAlimentacao(loadedData.alimentacao)
-                setArrayAlimentacao(loadedData.arrayAlimentacao)
-            }
-        }
-        catch(e){
-            Alert.alert(`Erro ${e}`);
-        }
+    const handleLoad = async () => {
+        await loadData(objectSets);
     }
 
 
     useEffect(() => {
-        loadData();
+        handleLoad();
     }, []);
 
 
@@ -154,11 +139,9 @@ export default function Formulario(){
             <Text style={styles.txtRelatorio}>Relatório de viagem</Text>
 
             <KeyboardAwareScrollView 
-                extraScrollHeight={Platform.OS == 'ios' ? 75 : 100 } 
+                extraScrollHeight={Platform.OS == 'ios' ? 90 : 100 } 
                 style={styles.containerScroll}
             >
-                <ScrollView>
-
                     <View style={styles.containerView1}>
                         <View style={styles.containerView}>
 
@@ -270,8 +253,6 @@ export default function Formulario(){
 
                         </View>
                     </View>
-                
-                </ScrollView>
             </KeyboardAwareScrollView>
 
 
@@ -286,7 +267,7 @@ export default function Formulario(){
                 <ModalBack
                     visible={showModal}
                     setShowModal={setShowModal}
-                    saveData={saveData}
+                    saveData={handleSave}
                 />
 
         </SafeAreaView>
