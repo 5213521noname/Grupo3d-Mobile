@@ -48,6 +48,7 @@ export default function Placa({state, setState}){
                     if(state != item.placa){
                         return(
                             <TouchableOpacity 
+                                key={index + 1}
                                 onPress={() => selectPlaca(item, index)}
                                 style={styles.btnSelectPlacas}
                             >

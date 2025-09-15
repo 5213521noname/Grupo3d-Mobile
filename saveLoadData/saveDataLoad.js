@@ -29,7 +29,7 @@ import { Alert } from 'react-native';
                 setters.setObs(loadedData.obs)
                 setters.setEstacionamento(loadedData.estacionamento)
                 setters.setValorEstacionamento(loadedData.valorEstacionamento)
-                setters.setHoraInicio(new Date(loadedData.horaInicio))
+                setters.setHoraIni(new Date(loadedData.horaIni))
                 setters.setHoraFim(new Date(loadedData.horaFim))
                 setters.setJob(loadedData.job)
                 setters.setProdutorEmpresa(loadedData.produtorEmpresa)
@@ -50,9 +50,48 @@ import { Alert } from 'react-native';
                 setters.setOutrosSetor(loadedData.outrosSetor)
                 setters.setAlimentacao(loadedData.alimentacao)
                 setters.setArrayAlimentacao(loadedData.arrayAlimentacao)
+
+                Alert.alert("Carregado com sucesso");
             }
         }
         catch(e){
             Alert.alert(`Erro ${e}`);
         }
+    };
+
+
+
+    export const clearData = (setters) => {
+        setters.setDateIni(new Date());
+        setters.setDateFim(new Date());
+        setters.setObs('');
+        setters.setEstacionamento('');
+        setters.setValorEstacionamento('');
+        setters.setHoraIni(new Date());
+        setters.setHoraFim(new Date());
+        setters.setJob('');
+        setters.setProdutorEmpresa('');
+        setters.setProdutorPessoa('');
+        setters.setKmIni('');
+        setters.setKmFim('');
+        setters.setZonaAzul('');
+        setters.setQtdZonaAzul('');
+        setters.setValorZonaAzul(0);
+        setters.setInversor('');
+        setters.setPedagio('');
+        setters.setParceiro('');
+        setters.setValorPedagioParceiro(0);
+        setters.setPlaca("Selecione a placa");
+        setters.setAtribuicao("Selecionar atribuição");
+        setters.setSetor("Selecionar setor");
+        setters.setOutrosAtribuicao('');
+        setters.setOutrosSetor('');
+        setters.setAlimentacao('');
+        setters.setArrayAlimentacao([
+            {id: 1, refeicao: '', valor: ''},
+        ]);
+
+        Alert.alert("Novo relatório criado!");
     }
+
+    

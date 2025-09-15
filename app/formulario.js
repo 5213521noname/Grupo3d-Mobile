@@ -1,6 +1,6 @@
+import { useLocalSearchParams } from 'expo-router';
 import { useEffect, useState } from 'react';
-import { Platform, StyleSheet, Text, View } from 'react-native';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { colors } from '../colors';
 import Alimentacao from '../components/formComponents/Alimentacao';
@@ -29,13 +29,15 @@ import { loadData, saveData } from '../saveLoadData/saveDataLoad';
 
 export default function Formulario(){
 
+    const { loadData: shouldLoadData } = useLocalSearchParams();
+
     //STATES
     const [dateIni, setDateIni] = useState(new Date());
     const [dateFim, setDateFim] = useState(new Date());
     const [obs, setObs] = useState('');
     const [estacionamento, setEstacionamento] = useState('');
     const [valorEstacionamento, setValorEstacionamento] = useState('');
-    const [horaInicio, setHoraInicio] = useState(new Date());
+    const [horaIni, setHoraIni] = useState(new Date());
     const [horaFim, setHoraFim] = useState(new Date());
     const [job, setJob] = useState('');
     const [produtorEmpresa, setProdutorEmpresa] = useState('');
@@ -67,7 +69,7 @@ export default function Formulario(){
         obs: obs,
         estacionamento: estacionamento,
         valorEstacionamento: valorEstacionamento,
-        horaInicio: horaInicio,
+        horaIni: horaIni,
         horaFim: horaFim,
         job: job,
         produtorEmpresa: produtorEmpresa,
@@ -96,7 +98,7 @@ export default function Formulario(){
         setObs,
         setEstacionamento,
         setValorEstacionamento,
-        setHoraInicio,
+        setHoraIni,
         setHoraFim,
         setJob,
         setProdutorEmpresa,
@@ -127,21 +129,24 @@ export default function Formulario(){
         await loadData(objectSets);
     }
 
-
     useEffect(() => {
-        handleLoad();
-    }, []);
-
+        if(shouldLoadData == 'true'){
+            handleLoad();
+        }
+        else {
+            const tempDate = (new Date());
+            tempDate.setHours(0, 0, 0, 0);
+            setDateIni(tempDate);
+            setDateFim(tempDate);
+        }
+    }, [])
 
     return(
         <SafeAreaView style={styles.containerSafeView}>
 
             <Text style={styles.txtRelatorio}>Relatório de viagem</Text>
 
-            <KeyboardAwareScrollView 
-                extraScrollHeight={Platform.OS == 'ios' ? 90 : 100 } 
-                style={styles.containerScroll}
-            >
+            <ScrollView style={styles.containerScroll}>
                     <View style={styles.containerView1}>
                         <View style={styles.containerView}>
 
@@ -153,19 +158,28 @@ export default function Formulario(){
                             <DataInicio
                                 dateIni={dateIni}
                                 setDateIni={setDateIni}
+                                dateFim={dateFim}
                             />
+                            
                             <HoraInicio
-                                timeIni={horaInicio}
-                                setTimeIni={setHoraInicio}
+                                timeIni={horaIni}
+                                setTimeIni={setHoraIni}
+                                dateIni={dateIni}
+                                timeFim={horaFim}
+                                dateFim={dateFim}
                             />
 
                             <DataFim
                                 dateFim={dateFim}
                                 setDateFim={setDateFim}
+                                dateIni={dateIni}
                             />
                             <HoraFim
                                 timeFim={horaFim}
                                 setTimeFim={setHoraFim}
+                                dateIni={dateIni}
+                                timeIni={horaIni}
+                                dateFim={dateFim}
                             />
 
                             <Job
@@ -253,7 +267,7 @@ export default function Formulario(){
 
                         </View>
                     </View>
-            </KeyboardAwareScrollView>
+            </ScrollView>
 
 
             <View style={styles.containerBtns}>

@@ -1,10 +1,19 @@
 import { FontAwesome } from '@expo/vector-icons';
+import { useState } from 'react';
 import { StyleSheet, Text, TextInput, View } from 'react-native';
 import { colors } from '../../colors';
 
 export default function Obs({setObs, obs}){
+
+    const [focus, setFocus] = useState(false)
+
     return(
-        <View style={styles.container}>
+        <View 
+            style={[
+                styles.container,
+                focus && styles.inputFocused
+            ]}
+        >
 
             <View style={styles.logoTxt}>
                 <FontAwesome
@@ -20,6 +29,8 @@ export default function Obs({setObs, obs}){
             <TextInput
                 placeholder={"Digite aqui: "}
                 onChangeText={setObs}
+                onFocus={() => setFocus(!focus)}
+                onBlur={() => setFocus(!focus)}
                 style={styles.input}
                 value={obs}
                 placeholderTextColor="rgba(0, 0, 0, 0.2)"
@@ -63,4 +74,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         marginBottom: 17
     },
+    inputFocused:{
+        marginBottom : 250
+    }
 });

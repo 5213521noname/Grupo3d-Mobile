@@ -8,9 +8,13 @@ export default function Home(){
     const router = useRouter();
     
     function novoRelatorio(){
-        router.push('./formulario');
+        router.push('./formulario')
     }
 
+    function carregarRelatorio(){
+        router.push({pathname: './formulario', params: { loadData: true}});
+    }
+        
     return(
         <View style={styles.containerView}>
 
@@ -19,12 +23,22 @@ export default function Home(){
                 style={styles.logo}
             />
 
-            <TouchableOpacity 
-                style={styles.btnNovoRelatorio}
-                onPress={novoRelatorio}
-            >
-                <Text style={styles.textNovoRelatorio}>Novo relatório</Text>
-            </TouchableOpacity>
+            <View style={styles.containerBtns}>
+                <TouchableOpacity 
+                    style={styles.btnNovoRelatorio}
+                    onPress={carregarRelatorio}
+                >
+                    <Text style={styles.txtRelatorio}>Carregar relatório</Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity 
+                    style={styles.btnNovoRelatorio}
+                    onPress={novoRelatorio}
+                >
+                    <Text style={styles.txtRelatorio}>Novo relatório</Text>
+                </TouchableOpacity>
+            </View>
+            
 
         </View>
     );
@@ -37,32 +51,35 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center'
     },
-    textNovoRelatorio:{
-        fontWeight: 'bold',
-        color: 'white',
-        fontSize: 16
-    },
-    btnNovoRelatorio:{
-        backgroundColor: colors.orange,
-        height: 60,
-        width: '55%',
-        justifyContent: 'center',
-        alignItems: 'center',
-        borderRadius: 7,
-        borderWidth: 1.5,
-        borderColor: 'white',
-        borderStyle: 'solid'
-    },
     logo:{
         height: 160,
         resizeMode: 'contain',
         marginBottom: 460
     },
-    txtBemVindo:{
+    containerBtns:{
+        width: '100%',
+        height: 55,
+        backgroundColor: 'black',
+        flexDirection: 'row',
+        justifyContent: 'space-around'
+    },
+    btnNovoRelatorio:{
+        backgroundColor: colors.orange,
+        alignItems: 'center',
+        borderRadius: 7,
+        borderColor: 'white',
+        borderStyle: 'solid',
+        width: '45%',
+        justifyContent: 'center',
+        borderWidth: 2
+    },
+    txtRelatorio:{
+        fontWeight: 'bold',
         color: 'white',
-        marginBottom: 480,
-        fontSize: 16,
-        fontWeight: 'bold'
-    }
+        fontSize: 16
+    },
+
+    
+
 });
 
