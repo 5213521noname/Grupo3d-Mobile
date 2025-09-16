@@ -1,7 +1,7 @@
 import { FontAwesome } from '@expo/vector-icons';
 import { useState } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { colors } from '../colors';
+import { colors } from './colors';
 
 export default function Placa({state, setState}){
 

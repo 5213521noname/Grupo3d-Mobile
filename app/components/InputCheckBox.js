@@ -1,6 +1,6 @@
 import { FontAwesome } from "@expo/vector-icons";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import { colors } from '../colors';
+import { colors } from './colors';
 
 export default function InputCheckBox({txtInput, btnState, setbtnState, iconName, size}){
 

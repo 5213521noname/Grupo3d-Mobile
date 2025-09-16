@@ -1,31 +1,28 @@
 import { FontAwesome } from '@expo/vector-icons';
 import DateTimePicker from '@react-native-community/datetimepicker';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Alert, Platform, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { colors } from '../../colors';
+import { colors } from '../colors';
 
-    export default function HoraInicio({timeIni, setTimeIni, dateIni, dateFim, timeFim}){
+    export default function HoraFim({timeFim, setTimeFim, dateIni, dateFim, timeIni}){
 
         const [showPicker, setShowPicker] = useState(false)
 
-        // FUNCAO QUE ATUALIZA O VALOR DO TIME INICIAL NO ANDROID
         function changeTimeAndroid(event, selectedTime){
             if(dateIni.getTime() == dateFim.getTime() && timeIni.getTime() > selectedTime.getTime()){
                 Alert.alert("A hora final não pode ser menor que a hora inicial!");
                 setShowPicker(false);
-                setShowPicker(true);
             } 
             else {
-                setTimeIni(selectedTime);
+                setTimeFim(selectedTime);
+                setShowPicker(false);
             }
         }
 
-        // FUNCAO QUE ATUALIZA O VALOR DO TIME INICIAL NO IOS
         function changeTimeIos(event, selectedTime){
-            setTimeIni(selectedTime);
+            setTimeFim(selectedTime);
         }
 
-        //FUNCAO PARA CONFIRMAR O VALOR E FECHAR O DATEPICKER NO IOS
         function showPickerIos(){
             if(dateIni.getTime() == dateFim.getTime() && timeIni.getTime() > timeFim.getTime()){
                 Alert.alert("A hora final não pode ser menor que a hora inicial!");
@@ -34,6 +31,12 @@ import { colors } from '../../colors';
                 setShowPicker(false);
             }
         }
+
+        useEffect(() => {
+            if(dateIni.getTime() == dateFim.getTime() && timeIni.getTime() > timeFim.getTime()){
+                setTimeFim(timeIni);
+            } 
+        }, [dateIni, dateFim])
 
         return(
             <View style={styles.container}>
@@ -45,14 +48,14 @@ import { colors } from '../../colors';
                     color="rgba(255, 255, 255, 1)"
                     />
                 
-                    <Text style={styles.txt}>Hora início</Text>
+                    <Text style={styles.txt}>Hora Final</Text>
                 </View>
                 
                 <TouchableOpacity 
                     onPress={() => setShowPicker(true)} 
                     style={styles.TimeIni}
                 >
-                    <Text>{`${timeIni.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`}</Text>
+                    <Text>{`${timeFim.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`}</Text>
                 </TouchableOpacity>
                 
                 {showPicker && (
@@ -60,7 +63,7 @@ import { colors } from '../../colors';
                         <DateTimePicker
                             display={Platform.OS === 'ios' ? 'spinner' : 'default'}
                             mode="time"
-                            value={timeIni}
+                            value={timeFim}
                             onChange={Platform.OS == 'android' ? changeTimeAndroid : changeTimeIos}
                             locale="pt-br"
                         />

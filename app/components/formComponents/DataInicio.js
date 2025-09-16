@@ -2,24 +2,26 @@ import { FontAwesome } from '@expo/vector-icons';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { useState } from 'react';
 import { Alert, Platform, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { colors } from '../../colors';
+import { colors } from '../colors';
 
-    export default function DataFim({dateFim, setDateFim, dateIni}){
+
+    export default function DataInicio({dateIni, setDateIni, dateFim}){
 
         const [showPicker, setShowPicker] = useState(false);
 
         function changeDate(event, selectedDate){
             if(Platform.OS == 'android'){
-                if(dateIni.getTime() < dateFim.getTime()){
-                    Alert.alert("A data final não pode ser menor que a data de inicio!")
-                } 
+                if(selectedDate.getTime() > dateFim.getTime()){
+                    setShowPicker(false);
+                    Alert.alert("A data de inicio não pode ser maior que a data final!")
+                }    
                 else {
-                    setDateFim(selectedDate);
-                }         
-                setShowPicker(false);     
+                    setDateIni(selectedDate);
+                    setShowPicker(false);
+                }           
             } 
-            else {
-                setDateFim(selectedDate);
+            else { //Platform IOS
+                setDateIni(selectedDate);
             }
         }
 
@@ -27,7 +29,7 @@ import { colors } from '../../colors';
             if(dateIni.getTime() <= dateFim.getTime()){
                 setShowPicker(false);
             } else {
-                Alert.alert("A data final não pode ser menor que a data de início!");
+                Alert.alert("A data de inicio não pode ser maior que a data final!");
             } 
         }
 
@@ -41,7 +43,7 @@ import { colors } from '../../colors';
                     color="rgba(255, 255, 255, 1)"
                     />
                 
-                    <Text style={styles.txt}>Data Final</Text>
+                    <Text style={styles.txt}>Data início</Text>
                 </View>
 
                 
@@ -49,7 +51,7 @@ import { colors } from '../../colors';
                     onPress={() => setShowPicker(true)} 
                     style={styles.dateIni}
                 >
-                    <Text>{`${dateFim.toLocaleDateString()}`}</Text>
+                    <Text>{`${dateIni.toLocaleDateString()}`}</Text>
                 </TouchableOpacity>
                 
                 {showPicker && (
@@ -57,7 +59,7 @@ import { colors } from '../../colors';
                         <DateTimePicker
                             display={Platform.OS === 'ios' ? 'inline' : 'default'}
                             mode="date"
-                            value={dateFim}
+                            value={dateIni}
                             onChange={changeDate}
                             locale="pt-br"
                         />

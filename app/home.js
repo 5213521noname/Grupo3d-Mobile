@@ -1,12 +1,12 @@
 import { useRouter } from 'expo-router';
 import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import logo from '../assets/images/logo.png';
-import { colors } from '../colors';
+import { colors } from './components/colors';
 
 export default function Home(){
 
     const router = useRouter();
-    
+
     function novoRelatorio(){
         router.push('./formulario')
     }

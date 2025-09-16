@@ -44,9 +44,7 @@ import InputCheckBox from '../InputCheckBox';
 
         useEffect(() => {
             setContador(array[array.length - 1].id + 1);
-        }, [
-            array
-        ]);
+        }, [ array ]);
 
         return(
             <View style={styles.containerView}>
@@ -57,8 +55,6 @@ import InputCheckBox from '../InputCheckBox';
                     iconName="user"
                     size={19}
                 />
-
-                
 
                 {(state == 'true') && (
 

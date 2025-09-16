@@ -1,40 +1,28 @@
 import { FontAwesome } from '@expo/vector-icons';
-import { useState } from 'react';
 import { StyleSheet, Text, TextInput, View } from 'react-native';
-import { colors } from '../../colors';
+import { colors } from './colors';
 
-export default function Obs({setObs, obs}){
-
-    const [focus, setFocus] = useState(false)
-
+export default function InputComponent({txtInput, txtPlaceholder, setState, value, iconName, size}){
     return(
-        <View 
-            style={[
-                styles.container,
-                focus && styles.inputFocused
-            ]}
-        >
+        <View style={styles.container}>
 
             <View style={styles.logoTxt}>
                 <FontAwesome
-                name="file"
-                size={17}
+                name={iconName}
+                size={size}
                 color="rgba(255, 255, 255, 1)"
                 />
 
-                <Text style={styles.txt}>{"Observações"}</Text>
+                <Text style={styles.txt}>{txtInput}</Text>
             </View>
 
 
             <TextInput
-                placeholder={"Digite aqui: "}
-                onChangeText={setObs}
-                onFocus={() => setFocus(!focus)}
-                onBlur={() => setFocus(!focus)}
+                placeholder={txtPlaceholder}
+                onChangeText={setState}
                 style={styles.input}
-                value={obs}
+                value={value}
                 placeholderTextColor="rgba(0, 0, 0, 0.2)"
-                multiline={true}
             />
         </View>
     );
@@ -44,11 +32,11 @@ const styles = StyleSheet.create({
     input:{
         width: '100%',
         backgroundColor: 'white',
-        fontSize: 14,
+        fontSize: 15,
         color: 'black',
-        padding: 15,
+        paddingLeft: 10,
         borderRadius: 8,
-        minHeight: 35,
+        height: 50
     },
     txt:{
         width: '100%',
@@ -56,7 +44,7 @@ const styles = StyleSheet.create({
         fontSize: 16,
         fontWeight: 'bold',
         marginLeft: 9,
-        color: 'white',
+        color: 'white'
     },
     logoTxt:{
         flexDirection: 'row',
@@ -74,7 +62,4 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         marginBottom: 17
     },
-    inputFocused:{
-        marginBottom : 250
-    }
 });
