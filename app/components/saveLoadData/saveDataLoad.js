@@ -16,7 +16,7 @@ import { Alert } from 'react-native';
         }
     };
 
-
+    
     //FUNÇÃO PARA CARREGAR DADOS DO DISPOSITIVO E INSERIR NOS ESTADOS DO FORMULÁRIO
     export const loadData = async (setters) => {
         try{

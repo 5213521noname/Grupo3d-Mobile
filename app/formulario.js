@@ -278,11 +278,11 @@ export default function Formulario(){
                 <BtnEnviar/>
             </View>
 
-                <ModalBack
-                    visible={showModal}
-                    setShowModal={setShowModal}
-                    saveData={handleSave}
-                />
+            <ModalBack
+                visible={showModal}
+                setShowModal={setShowModal}
+                saveData={handleSave}
+            />
 
         </SafeAreaView>
         

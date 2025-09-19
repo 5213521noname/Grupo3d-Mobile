@@ -41,11 +41,11 @@ import { colors } from '../colors';
         return(
             <View style={styles.container}>
 
-                <View style={styles.logoTxt}>
+                <View style={styles.iconTxt}>
                     <FontAwesome
-                    name="user"
-                    size={19}
-                    color="rgba(255, 255, 255, 1)"
+                        name="user"
+                        size={19}
+                        color="rgba(255, 255, 255, 1)"
                     />
                 
                     <Text style={styles.txt}>Hora Final</Text>
@@ -96,7 +96,7 @@ import { colors } from '../colors';
             width: '100%',
             marginBottom: 17,
         },
-        logoTxt:{
+        iconTxt:{
             flexDirection: 'row',
             alignItems: 'center',
             backgroundColor: colors.orange,

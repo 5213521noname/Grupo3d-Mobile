@@ -1,27 +1,47 @@
 import { FontAwesome } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { collection, getDocs, query, where } from 'firebase/firestore';
 import { useState } from 'react';
 import { Alert, Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import logo from '../assets/images/logo.png';
+import { auth, db } from '../src/firebaseconfig';
 import { colors } from './components/colors';
-
 
 export default function Index() {
 
-  const [usuario, setUsuario] = useState('teste');
-  const [senha, setSenha] = useState('123456789');
+  const [usuario, setUsuario] = useState('');
+  const [senha, setSenha] = useState('');
 
   const router = useRouter();
 
-  function handleLogin(){
-    if(usuario.trim() === '' || senha.trim() === ''){
-      Alert.alert("Erro, preencha todos os campos");
-      return;
+  const handleLogin = async () => {
+
+    if(!usuario || !senha){
+        Alert.alert("Preencha os campos");
+        return;
     }
-    if(usuario.trim() === 'teste' && senha.trim() === '123456789'){
+
+    try{ 
+        const usersRef = collection(db, 'users');
+        const q = query(usersRef, where('user', '==', usuario));
+        const querySnapshot = await getDocs(q);
+
+        if(querySnapshot.empty){
+            Alert.alert("Usuário ou senha inválidos!");
+            return ;
+        }
+
+        let email = null;
+        querySnapshot.forEach(doc => {
+            email = doc.data().email;
+        })
+
+      await signInWithEmailAndPassword(auth, email, senha);
       router.replace('./home');
-    } else {
-      Alert.alert("Usuário ou senha inválidos!");
+    }
+    catch(error){
+      Alert.alert(`Não foi possível fazer login! ${error}`);
     }
   }
 
