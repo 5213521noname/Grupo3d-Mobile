@@ -18,7 +18,7 @@ export default function Index() {
   const handleLogin = async () => {
 
     if(!usuario || !senha){
-        Alert.alert("Preencha os campos");
+        Alert.alert("Preencha os campos!");
         return;
     }
 
